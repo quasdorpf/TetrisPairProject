@@ -28,7 +28,4 @@ public abstract class Tetromino {
 	public int getY() {
 		return position[0];
 	}
-	public static void main(String[] args) {
-		
-	}
 }
