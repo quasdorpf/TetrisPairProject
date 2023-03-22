@@ -18,4 +18,7 @@ public abstract class Tetromino {
 	public Block[][] getRotation() {
 		return rotations[currRotation];
 	}
+	public static void main(String[] args) {
+		
+	}
 }
