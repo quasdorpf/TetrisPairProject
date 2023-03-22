@@ -5,6 +5,9 @@ public abstract class Tetromino {
 	private Block[][][] rotations;
 	private int[] position;
 	private int currRotation = 0; // would be used in rotations[currRotation]
+	public void setRotations(Block[][][] rot) {
+		rotations = rot;
+	}
 	public void rotate(int leftOrRight) {
 		if (leftOrRight == -1 || leftOrRight == 1) {
 			currRotation += leftOrRight;
