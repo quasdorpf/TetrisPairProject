@@ -1,7 +1,7 @@
 import java.awt.Color;
 
 public class ITetromino extends Tetromino {
-	private static final Color color = Color.cyan;
+	private static final Color color = Color.CYAN;
 	public ITetromino() {
 		Block[][][] rotations = new Block[4][4][4];
 		for (int i=0; i<rotations.length; i++) {
