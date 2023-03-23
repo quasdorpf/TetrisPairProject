@@ -28,4 +28,7 @@ public abstract class Tetromino {
 	public int getY() {
 		return position[0];
 	}
+	public int size() {
+		return rotations[0].length;
+	}
 }

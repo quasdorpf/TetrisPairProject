@@ -13,16 +13,16 @@ public class ITetromino extends Tetromino {
 		}
 		for (int i=0; i<4; i++) {
 			// 0 - UP
-			rotations[0][i][1].setEmpty(false);
+			rotations[0][1][i].setEmpty(false);
 			
 			// 1 - RIGHT
-			rotations[1][2][i].setEmpty(false);
+			rotations[1][i][2].setEmpty(false);
 			
 			// 2 - DOWN
-			rotations[2][i][2].setEmpty(false);
+			rotations[2][2][i].setEmpty(false);
 			
 			// 3 - LEFT
-			rotations[3][1][i].setEmpty(false);
+			rotations[3][i][1].setEmpty(false);
 		}
 		
 		setRotations(rotations);

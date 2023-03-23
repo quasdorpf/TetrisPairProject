@@ -9,7 +9,8 @@ public class RunTetris {
 	private int score;
 	private boolean playingTetris = false;
 	public RunTetris() {
-		
+		screen = new JFrame();
+		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 	
 	public void playTetris() {

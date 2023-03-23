@@ -13,27 +13,27 @@ public class JTetromino extends Tetromino {
 		}
 		// 0 - UP
 		rotations[0][0][0].setEmpty(false);
-		rotations[0][0][1].setEmpty(false);
+		rotations[0][1][0].setEmpty(false);
 		rotations[0][1][1].setEmpty(false);
-		rotations[0][2][1].setEmpty(false);
+		rotations[0][1][2].setEmpty(false);
 		
 		// 1 - RIGHT
-		rotations[1][1][0].setEmpty(false);
+		rotations[1][0][1].setEmpty(false);
 		rotations[1][1][1].setEmpty(false);
-		rotations[1][1][2].setEmpty(false);
-		rotations[1][2][0].setEmpty(false);
+		rotations[1][2][1].setEmpty(false);
+		rotations[1][0][2].setEmpty(false);
 		
 		// 2 - DOWN
-		rotations[2][0][1].setEmpty(false);
+		rotations[2][1][0].setEmpty(false);
 		rotations[2][1][1].setEmpty(false);
-		rotations[2][2][1].setEmpty(false);
+		rotations[2][1][2].setEmpty(false);
 		rotations[2][2][2].setEmpty(false);
 		
 		// 3 - LEFT
-		rotations[3][0][2].setEmpty(false);
-		rotations[3][1][0].setEmpty(false);
+		rotations[3][2][0].setEmpty(false);
+		rotations[3][0][1].setEmpty(false);
 		rotations[3][1][1].setEmpty(false);
-		rotations[3][1][2].setEmpty(false);
+		rotations[3][2][1].setEmpty(false);
 		
 		setRotations(rotations);
 	}
