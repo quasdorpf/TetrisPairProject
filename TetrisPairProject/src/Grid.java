@@ -14,10 +14,13 @@ public class Grid {
 		Block[][] tetromino = currTetr.getRotation();
 		for(int i=0;i<tetromino.length;i++){
 			for(int j=0;j<tetromino[0].length;j++){
-				grid[i+currTetr.getY()][i+currTetr.getX()]=tetromino[i][j];
+				int row = i+currTetr.getY();
+				int col = i+currTetr.getX();
+				if (!tetromino[i][j].isEmpty())
+					grid[row][col]=tetromino[i][j];
 			}
+			for (int j=0;j<10;j++);
 		}
-				
 		
 	}
 
