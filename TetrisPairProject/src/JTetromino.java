@@ -31,9 +31,9 @@ public class JTetromino extends Tetromino {
 		
 		// 3 - LEFT
 		rotations[3][0][2].setEmpty(false);
-		rotations[3][2][0].setEmpty(false);
-		rotations[3][2][1].setEmpty(false);
-		rotations[3][2][2].setEmpty(false);
+		rotations[3][1][0].setEmpty(false);
+		rotations[3][1][1].setEmpty(false);
+		rotations[3][1][2].setEmpty(false);
 		
 		setRotations(rotations);
 	}
