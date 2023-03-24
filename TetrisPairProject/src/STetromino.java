@@ -7,33 +7,33 @@ public class STetromino extends Tetromino {
 		for (int i=0; i<rotations.length; i++) {
 			for (int j=0; j<rotations[0].length; j++) {
 				for (int k=0; k<rotations[0][0].length; k++) {
-					rotations[i][j][k] = new Block(color);
+					rotations[i][j][k] = new Block();
 				}
 			}
 		}
 		// 0 - UP
-		rotations[0][1][0].setEmpty(false);
-		rotations[0][0][1].setEmpty(false);
-		rotations[0][1][1].setEmpty(false);
-		rotations[0][0][2].setEmpty(false);
+		rotations[0][1][0] = new Block(color);
+		rotations[0][0][1] = new Block(color);
+		rotations[0][1][1] = new Block(color);
+		rotations[0][0][2] = new Block(color);
 		
 		// 1 - RIGHT
-		rotations[1][0][1].setEmpty(false);
-		rotations[1][1][1].setEmpty(false);
-		rotations[1][1][2].setEmpty(false);
-		rotations[1][2][2].setEmpty(false);
+		rotations[1][0][1] = new Block(color);
+		rotations[1][1][1] = new Block(color);
+		rotations[1][1][2] = new Block(color);
+		rotations[1][2][2] = new Block(color);
 		
 		// 2 - DOWN
-		rotations[2][2][0].setEmpty(false);
-		rotations[2][1][1].setEmpty(false);
-		rotations[2][2][1].setEmpty(false);
-		rotations[2][1][2].setEmpty(false);
+		rotations[2][2][0] = new Block(color);
+		rotations[2][1][1] = new Block(color);
+		rotations[2][2][1] = new Block(color);
+		rotations[2][1][2] = new Block(color);
 		
 		// 3 - LEFT
-		rotations[3][0][0].setEmpty(false);
-		rotations[3][1][0].setEmpty(false);
-		rotations[3][1][1].setEmpty(false);
-		rotations[3][2][1].setEmpty(false);
+		rotations[3][0][0] = new Block(color);
+		rotations[3][1][0] = new Block(color);
+		rotations[3][1][1] = new Block(color);
+		rotations[3][2][1] = new Block(color);
 
 		setRotations(rotations);
 	}

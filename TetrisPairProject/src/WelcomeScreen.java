@@ -7,7 +7,7 @@ public class WelcomeScreen {
 	}
 	
 	public void display(Graphics g, JFrame screen, GamePanel gamePanel) {
-		
+		gamePanel.add(playButton);
 	}
 	
 }
