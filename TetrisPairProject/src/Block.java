@@ -3,9 +3,13 @@ import java.awt.*;
 public class Block {
 	private Color color;
 	private boolean empty;
-	public Block(Color color, boolean empty) {
+	public Block(Color color) {
 		this.color = color;
-		this.empty = empty;
+		empty = false;
+	}
+	public Block() {
+		this.color = Color.GRAY;
+		empty = true;
 	}
 	public Color getColor() {
 		return color;

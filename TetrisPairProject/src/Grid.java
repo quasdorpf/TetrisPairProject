@@ -7,6 +7,16 @@ public class Grid {
 	private Block[][] visibleGrid;
 	private Block[][] grid;
 	private int score;
+	
+	Grid(){
+		grid = new Block[20][10];
+		for(int i=0;i<grid.length;i++){
+			for(int j=0;j<grid[0].length;j++){
+				grid[i][j] = new Block();
+			}
+		}
+		visibleGrid = grid.clone();
+	}
 
 	public void dropTetr(Tetromino tetr) {
 		currTetr = tetr;
