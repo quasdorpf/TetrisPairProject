@@ -10,19 +10,25 @@ public class Grid {
 	
 	Grid(){
 		grid = new Block[20][10];
+		nextTetr = new ArrayList<Tetromino>();
 		for(int i=0;i<grid.length;i++){
 			for(int j=0;j<grid[0].length;j++){
 				grid[i][j] = new Block();
 			}
 		}
 		visibleGrid = grid.clone();
+		dropTetr(Tetromino.getRandomTetromino());
+		for (int i=0;i<4;i++)
+			nextTetr.add(Tetromino.getRandomTetromino());
 	}
-
 	public void dropTetr(Tetromino tetr) {
 		currTetr = tetr;
 	}
-	public void fallTetr(Tetromino tetr) {
-		tetr.shift('D');
+	public void fallTetr() {
+		currTetr.shift('D');
+	}
+	public void shiftTetr(char dir) {
+		currTetr.shift(dir);
 	}
 	public void holdTetr() {
 		if (heldTetr == null) {
@@ -59,6 +65,26 @@ public class Grid {
 			nextTetr.add(Tetromino.getRandomTetromino());
 		}
 		
+	}
+	public Block[][] makeVisible() {
+		Block[][] visibleGrid = new Block[20][10];
+		for(int i=0;i<grid.length;i++){
+			for(int j=0;j<grid[0].length;j++){
+				visibleGrid[i][j] = grid[i][j];
+			}
+		}
+		Block[][] tetromino = currTetr.getRotation();
+		for(int i=0;i<tetromino.length;i++){
+			for(int j=0;j<tetromino[0].length;j++){
+				int row = i+currTetr.getY();
+				int col = j+currTetr.getX();
+				System.out.print(grid[row][col].isEmpty());
+				if (grid[row][col].isEmpty())
+					visibleGrid[row][col]=tetromino[i][j];
+				System.out.println(grid[row][col].isEmpty());
+			}
+		}
+		return visibleGrid;
 	}
 	private void clearRows(ArrayList<Integer> rows) {
 		

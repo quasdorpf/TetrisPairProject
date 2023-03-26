@@ -6,6 +6,9 @@ public abstract class Tetromino {
 	private Block[][][] rotations;
 	private int[] position;
 	private int currRotation = 0; // would be used in rotations[currRotation]
+	Tetromino(){
+		position = new int[]{0,0};
+	}
 	public void setRotations(Block[][][] rot) {
 		rotations = rot;
 	}
@@ -41,7 +44,7 @@ public abstract class Tetromino {
 	}
 	public void shift(char dir) {
 		switch (dir) {
-		case 'D':position[0]-- ;
+		case 'D':position[0]++ ;
 		case 'R':position[1]++;
 		case 'L':position[1]--;
 		default:;
