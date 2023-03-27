@@ -16,7 +16,7 @@ public class GamePanel extends JPanel {
 	}
 	
 	public void drawWelcomeScreenAndLeaderboard(Graphics g) {
-		//g.draw3DRect(100, 100, 100, 100, );
+		new Block(Color.RED).draw(g, 100, 100, 100);
 	}
 	
 	public void drawGrid(Graphics g) {
