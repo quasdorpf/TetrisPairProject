@@ -6,6 +6,7 @@ public class Block {
 	private Color shadedColor;
 	private Color darkColor;
 	private boolean empty;
+	private int[] coords;
 	public Block(Color color) {
 		this.color = color;
 		empty = false;
@@ -28,6 +29,16 @@ public class Block {
 	}
 	public void setEmpty(boolean e) {
 		empty = e;
+	}
+	public void setCoords(int row, int column) {
+		coords[0] = row;
+		coords[1] = column;
+	}
+	public int getY() {
+		return coords[0];
+	}
+	public int getX() {
+		return coords[1];
 	}
 	public void draw(Graphics g, int x, int y, int size) {
 		if (!empty) {
