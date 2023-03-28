@@ -3,7 +3,8 @@ import java.awt.*;
 public class Block {
 	private Color color;
 	private Color lightColor;
-	private Color shadedColor;
+	private Color shadedColor1;
+	private Color shadedColor2;
 	private Color darkColor;
 	private boolean empty;
 	private int[] coords;
@@ -62,12 +63,13 @@ public class Block {
 			g.fillPolygon(xCoordsT, yCoordsT, 4);
 			
 			// Left
-			g.setColor(shadedColor);
+			g.setColor(shadedColor1);
 			int[] xCoordsL = {x, x+sideSize, x+sideSize, x};
 			int[] yCoordsL = {y, y+sideSize, y+size-sideSize, y+size};
 			g.fillPolygon(xCoordsL, yCoordsL, 4);
 			
 			// Right
+			g.setColor(shadedColor2);
 			int[] xCoordsR = {x+size, x+size-sideSize, x+size-sideSize, x+size};
 			int[] yCoordsR = {y, y+sideSize, y+size-sideSize, y+size};
 			g.fillPolygon(xCoordsR, yCoordsR, 4);
@@ -90,13 +92,16 @@ public class Block {
 			darkHSB[i] = hsb[i];
 		}
 		
-		lightHSB[1] = (float) (hsb[1] * 0.6);
+		lightHSB[1] = (float) (hsb[1] * 0.4);
 		lightColor = Color.getHSBColor(lightHSB[0], lightHSB[1], lightHSB[2]);
 		
-		shadedHSB[2] = (float) (hsb[2] * 0.9);
-		shadedColor = Color.getHSBColor(shadedHSB[0], shadedHSB[1], shadedHSB[2]);
+		lightHSB[1] = (float) (hsb[1] * 0.6);
+		shadedColor1 = Color.getHSBColor(lightHSB[0], lightHSB[1], lightHSB[2]);
 		
-		darkHSB[2] = (float) (hsb[2] * 0.7);
+		shadedHSB[2] = (float) (hsb[2] * 0.7);
+		shadedColor2 = Color.getHSBColor(shadedHSB[0], shadedHSB[1], shadedHSB[2]);
+		
+		darkHSB[2] = (float) (hsb[2] * 0.5);
 		darkColor = Color.getHSBColor(darkHSB[0], darkHSB[1], darkHSB[2]);
 	}
 }
