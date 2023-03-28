@@ -63,4 +63,7 @@ public class JTetromino extends Tetromino {
 		setRotations(rotations);
 		setRotation(rotation);
 	}
+	public Tetromino getNewTetromino() {
+		return new JTetromino();
+	}
 }

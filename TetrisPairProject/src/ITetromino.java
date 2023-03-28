@@ -40,4 +40,7 @@ public class ITetromino extends Tetromino {
 		
 		setRotation(rotation);
 	}
+	public Tetromino getNewTetromino() {
+		return new ITetromino();
+	}
 }

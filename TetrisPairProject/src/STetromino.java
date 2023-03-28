@@ -63,4 +63,7 @@ public class STetromino extends Tetromino {
 		setRotations(rotations);
 		setRotation(rotation);
 	}
+	public Tetromino getNewTetromino() {
+		return new STetromino();
+	}
 }

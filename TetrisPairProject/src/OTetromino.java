@@ -12,14 +12,17 @@ public class OTetromino extends Tetromino {
 			}
 		}
 		Block[][] rotation = new Block[4][4];
-		for (int i=0; i<2; i++) {
-			for (int j=0; j<2; j++) {
-				for (int k=0; k<rotations[0][0].length; k++) {
+		for (int k=0; k<4; k++) {
+			for (int i=0; i<2; i++) {
+				for (int j=0; j<2; j++) {
 					rotation[k][2*i+j] = new Block(color,new int[]{i,j});
 				}
 			}
 		}
 		setRotations(rotations);
 		setRotation(rotation);
+	}
+	public Tetromino getNewTetromino() {
+		return new OTetromino();
 	}
 }

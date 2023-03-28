@@ -12,6 +12,7 @@ public abstract class Tetromino {
 		position = new int[]{0,0};
 		rotation = new Block[4][4];
 	}
+	public abstract Tetromino getNewTetromino();
 	public void setRotations(Block[][][] rot) {
 		rotations = rot;
 	}
