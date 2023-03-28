@@ -4,13 +4,18 @@ public abstract class Tetromino {
 	public static final int LEFT = -1;
 	public static final int RIGHT = 1;
 	private Block[][][] rotations;
+	private Block[][] rotation;
 	private int[] position;
 	private int currRotation = 0; // would be used in rotations[currRotation]
 	Tetromino(){
 		position = new int[]{0,0};
+		rotation = new Block[4][4];
 	}
 	public void setRotations(Block[][][] rot) {
 		rotations = rot;
+	}
+	public void setRotation(Block[][] rot) {
+		rotation = rot;
 	}
 	public void rotate(int leftOrRight) {
 		if (leftOrRight == -1 || leftOrRight == 1) {
@@ -42,12 +47,23 @@ public abstract class Tetromino {
 	public Block[][] getRotation() {
 		return rotations[currRotation];
 	}
+	public Block[] getBlocks() {
+		return rotation[currRotation];
+	}
 	public void shift(char dir) {
 		switch (dir) {
-		case 'D':position[0]++ ;
-		case 'R':position[1]++;
-		case 'L':position[1]--;
+		case 'D':setBlockPosition(1,0);
+		case 'R':setBlockPosition(0,1);
+		case 'L':setBlockPosition(0,-1);
 		default:;
+		}
+		
+	}
+	public void setBlockPosition(int row, int col) {
+		for(Block[] rot:rotation) {
+			for (Block block:rot) {
+				block.shiftCoords(row, col);
+			}
 		}
 	}
 	public int getX() {

@@ -1,7 +1,17 @@
 import java.awt.event.*;
 
 public class Clicker implements KeyListener, MouseListener {
-	
+	Grid grid;
+	Block[][] visibleGrid;
+	Clicker(Grid g){
+		grid = g;
+		visibleGrid = g.makeVisible();
+		for (Block[] row: visibleGrid) {
+			for (Block block: row)
+				System.out.print(block.isEmpty()+"  ");
+			System.out.println();
+		}
+	}
 	public void keyTyped(KeyEvent e) {
 		
 	}
@@ -15,7 +25,17 @@ public class Clicker implements KeyListener, MouseListener {
 	}
 	
 	public void mouseClicked(MouseEvent e) {
-		
+		System.out.println("jj");
+//		if (e.getKeyChar()==KeyEvent.VK_SPACE)
+			grid.fallTetr();
+		visibleGrid = grid.makeVisible();
+		for (Block[] row: visibleGrid) {
+			for (Block block: row)
+				System.out.print(block.isEmpty()+"  ");
+			System.out.println();
+		}
+		System.out.println();
+		System.out.println();
 	}
 	
 	public void mousePressed(MouseEvent e) {

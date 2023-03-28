@@ -7,13 +7,15 @@ public class Block {
 	private Color darkColor;
 	private boolean empty;
 	private int[] coords;
-	public Block(Color color) {
+	public Block(Color color, int[] coords) {
 		this.color = color;
+		this.coords = coords.clone();
 		empty = false;
 		setLightShadedAndDarkColors();
 	}
 	public Block() {
 		this.color = Color.GRAY;
+		coords = new int[] {0,0};
 		empty = true;
 		setLightShadedAndDarkColors();
 	}
@@ -33,6 +35,10 @@ public class Block {
 	public void setCoords(int row, int column) {
 		coords[0] = row;
 		coords[1] = column;
+	}
+	public void shiftCoords(int row, int column) {
+		coords[0]+=row;
+		coords[1]+=column;
 	}
 	public int getY() {
 		return coords[0];

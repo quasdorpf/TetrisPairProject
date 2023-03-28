@@ -26,6 +26,17 @@ public class Grid {
 	}
 	public void fallTetr() {
 		currTetr.shift('D');
+//		Block[][] tetromino = currTetr.getRotation();
+//		for(int i=0;i<tetromino.length;i++){
+//			for(int j=0;j<tetromino[0].length;j++){
+//				int row = i+currTetr.getY();
+//				int col = j+currTetr.getX();
+//				System.out.print(grid[row][col].isEmpty());
+//				if (tetromino[i+1][j].isEmpty()&&visibleGrid[row][col])
+//					visibleGrid[row][col]=tetromino[i][j];
+//				System.out.println(grid[row][col].isEmpty());
+//			}
+//		}
 	}
 	public void shiftTetr(char dir) {
 		currTetr.shift(dir);
@@ -73,16 +84,9 @@ public class Grid {
 				visibleGrid[i][j] = grid[i][j];
 			}
 		}
-		Block[][] tetromino = currTetr.getRotation();
-		for(int i=0;i<tetromino.length;i++){
-			for(int j=0;j<tetromino[0].length;j++){
-				int row = i+currTetr.getY();
-				int col = j+currTetr.getX();
-				System.out.print(grid[row][col].isEmpty());
-				if (grid[row][col].isEmpty())
-					visibleGrid[row][col]=tetromino[i][j];
-				System.out.println(grid[row][col].isEmpty());
-			}
+		Block[] tetr = currTetr.getBlocks();
+		for(Block block: tetr) {
+			visibleGrid[block.getY()][block.getX()] = block;
 		}
 		return visibleGrid;
 	}
