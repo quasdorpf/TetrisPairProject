@@ -1,6 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 public class GamePanel extends JPanel {
+	public static final Tetromino[] tetrs = {
+			new ITetromino(), new JTetromino(), new LTetromino(),
+			new OTetromino(), new STetromino(), new TTetromino(), 
+			new ZTetromino()
+	};
 	
 	public GamePanel(int width, int height) {
 		setPreferredSize(new Dimension(width, height));
@@ -16,7 +21,10 @@ public class GamePanel extends JPanel {
 	}
 	
 	public void drawWelcomeScreenAndLeaderboard(Graphics g) {
-		new ZTetromino().draw(g, 100, 100, 50);
+		for (int i=0; i<tetrs.length; i++) {
+			tetrs[i].draw(g, i*100+50, 50, 20);
+		}
+		new Block().draw(g, 100, 400, 100);
 	}
 	
 	public void drawGrid(Graphics g) {
