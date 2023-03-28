@@ -1,8 +1,11 @@
 import javax.swing.*;
+import java.awt.event.*;
 
 public class RunTetris {
 	private static final int DEFAULT_WIDTH = 800;
 	private static final int DEFAULT_HEIGHT = 600;
+	private static final int TIME_BETWEEN_ANIMATIONS = 10;
+	private static final int TIME_BETWEEN_DROPS = 10;
 	
 	private JFrame screen;
 	private GamePanel gamePanel;
@@ -41,7 +44,26 @@ public class RunTetris {
 		screen.setContentPane(gamePanel);
 		screen.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		screen.setVisible(true);
+		refreshTimer.start();
 	}
+	
+	ActionListener refresher = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			if (state == gameState.welcomeScreen) {
+				
+			} else if (state == gameState.playing) {
+				
+			}
+		}
+	};
+	Timer refreshTimer = new Timer(TIME_BETWEEN_ANIMATIONS, refresher);
+	
+	ActionListener dropper = new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			
+		}
+	};
+	Timer dropTimer = new Timer(TIME_BETWEEN_DROPS, dropper);
 	
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
