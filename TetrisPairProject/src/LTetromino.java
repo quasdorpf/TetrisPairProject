@@ -1,7 +1,7 @@
 import java.awt.Color;
 
 public class LTetromino extends Tetromino {
-	private static final Color color = new Color(255, 185, 0); // Orange, a better shade than Color.ORANGE;
+	private static final Color color = new Color(255, 165, 0); // Orange, a better shade than Color.ORANGE;
 	public LTetromino() {
 		Block[][][] rotations = new Block[4][3][3];
 		Block[][] rotation = new Block[4][4];

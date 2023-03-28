@@ -16,8 +16,7 @@ public class GamePanel extends JPanel {
 	}
 	
 	public void drawWelcomeScreenAndLeaderboard(Graphics g) {
-		new Block(new Color(255, 165, 0)).draw(g, 100, 100, 100);
-		new Block(Color.ORANGE).draw(g, 300, 100, 100);
+		new ZTetromino().draw(g, 100, 100, 50);
 	}
 	
 	public void drawGrid(Graphics g) {

@@ -1,4 +1,5 @@
 import java.util.*;
+import java.awt.*;
 
 public abstract class Tetromino {
 	public static final int LEFT = -1;
@@ -60,6 +61,8 @@ public abstract class Tetromino {
 		
 	}
 	public void setBlockPosition(int row, int col) {
+		position[0] += row;
+		position[1] += col;
 		for(Block[] rot:rotation) {
 			for (Block block:rot) {
 				block.shiftCoords(row, col);
@@ -74,5 +77,16 @@ public abstract class Tetromino {
 	}
 	public int size() {
 		return rotations[0].length;
+	}
+	public void draw(Graphics g, int x, int y, int blockSize) {
+		Block[] rot = rotation[currRotation];
+		int blockX;
+		int blockY;
+		for (int i=0; i<rotation.length; i++) {
+			Block b = rot[i];
+			blockX = x + ((b.getX()-position[1]) * blockSize);
+			blockY = y + ((b.getY()-position[0]) * blockSize);
+			b.draw(g, blockX, blockY, blockSize);
+		}
 	}
 }
