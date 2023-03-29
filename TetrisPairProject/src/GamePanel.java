@@ -6,6 +6,9 @@ public class GamePanel extends JPanel {
 			new OTetromino(), new STetromino(), new TTetromino(), 
 			new ZTetromino()
 	};
+	private JFrame screen = RunTetris.screen;
+	private WelcomeScreen welcomeScreen = RunTetris.welcomeScreen;
+	private Leaderboard leaderboard = RunTetris.leaderboard;
 	
 	public GamePanel(int width, int height) {
 		setPreferredSize(new Dimension(width, height));
@@ -21,10 +24,11 @@ public class GamePanel extends JPanel {
 	}
 	
 	public void drawWelcomeScreenAndLeaderboard(Graphics g) {
+		
 		for (int i=0; i<tetrs.length; i++) {
 			tetrs[i].draw(g, i*100+50, 50, 20);
 		}
-		new Block().draw(g, 100, 400, 100);
+		welcomeScreen.display(g, screen, this);
 	}
 	
 	public void drawGrid(Graphics g) {

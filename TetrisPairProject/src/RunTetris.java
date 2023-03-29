@@ -7,8 +7,9 @@ public class RunTetris {
 	private static final int TIME_BETWEEN_ANIMATIONS = 10;
 	private static final int TIME_BETWEEN_DROPS = 10;
 	
-	private JFrame screen;
-	private GamePanel gamePanel;
+	public static JFrame screen;
+	private static GamePanel gamePanel;
+	private static Clicker clicker;
 	public static WelcomeScreen welcomeScreen;
 	public static Leaderboard leaderboard;
 	public static Grid grid;
@@ -39,10 +40,11 @@ public class RunTetris {
 		currScore = 0;
 		
 		gamePanel = new GamePanel(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		
-		// temp
+		clicker = new Clicker(grid);
+		gamePanel.addMouseListener(clicker);
+		gamePanel.addKeyListener(clicker);
 		screen.setContentPane(gamePanel);
-		screen.setSize(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		screen.pack();
 		screen.setVisible(true);
 		refreshTimer.start();
 	}
@@ -54,6 +56,7 @@ public class RunTetris {
 			} else if (state == gameState.playing) {
 				
 			}
+			gamePanel.repaint();
 		}
 	};
 	Timer refreshTimer = new Timer(TIME_BETWEEN_ANIMATIONS, refresher);
