@@ -42,7 +42,6 @@ public class RunTetris {
 		gamePanel = new GamePanel(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		clicker = new Clicker(grid);
 		gamePanel.addMouseListener(clicker);
-		gamePanel.addKeyListener(clicker);
 		screen.setContentPane(gamePanel);
 		screen.pack();
 		screen.setVisible(true);

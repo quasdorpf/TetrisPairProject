@@ -30,7 +30,7 @@ public class Grid {
 			boolean pause=(block.getY()+1==20);
 			if(!pause)
 				pause|=!grid[block.getY()+1][block.getX()].isEmpty();
-			stop|=pause;
+			stop=pause;
 		}
 		if (!stop)
 			currTetr.shift('D');
@@ -38,7 +38,22 @@ public class Grid {
 			setTetr();
 	}
 	public void shiftTetr(char dir) {
-		currTetr.shift(dir);
+		boolean stop = false;
+		for(Block block: currTetr.getBlocks()) {
+			boolean pause = false;
+			if (dir==82) {
+				pause=(block.getX()+1==10);
+				if(!pause)
+					pause|=!grid[block.getY()][block.getX()+1].isEmpty();
+			} else if (dir==76) {
+				pause=(block.getX()-1==-1);
+				if(!pause)
+					pause|=!grid[block.getY()][block.getX()-1].isEmpty();
+			}
+			stop|=pause;
+		}
+		if (!stop) {
+			currTetr.shift(dir);}
 	}
 	public void rotate(int leftorRight) {
 		currTetr.rotate(leftorRight);

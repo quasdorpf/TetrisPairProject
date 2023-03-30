@@ -55,8 +55,11 @@ public abstract class Tetromino {
 	public void shift(char dir) {
 		switch (dir) {
 		case 'D':setBlockPosition(1,0);
+			break;
 		case 'R':setBlockPosition(0,1);
+			break;
 		case 'L':setBlockPosition(0,-1);
+			break;
 		default:;
 		}
 		
@@ -66,6 +69,7 @@ public abstract class Tetromino {
 		position[1] += col;
 		for(Block[] rot:rotation) {
 			for (Block block:rot) {
+				System.out.println(col);
 				block.shiftCoords(row, col);
 			}
 		}
