@@ -10,10 +10,12 @@ public class ShiftAction extends AbstractAction {
 		this.grid = grid;
 	}
 	public void actionPerformed(ActionEvent e) {
-		if(name.charAt(0)=='D')
+		if(name.charAt(0)=='D') {
 			grid.fallTetr();
-		else
+			RunTetris.dropTimer.restart();
+		} else {
 			grid.shiftTetr(name.charAt(0));
+		}
 		Block[][] visibleGrid = grid.makeVisible();
 		for (Block[] row: visibleGrid) {
 			for (Block block: row)
