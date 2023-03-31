@@ -30,7 +30,7 @@ public class Grid {
 			boolean pause=(block.getY()+1==20);
 			if(!pause)
 				pause|=!grid[block.getY()+1][block.getX()].isEmpty();
-			stop=pause;
+			stop|=pause;
 		}
 		if (!stop)
 			currTetr.shift('D');

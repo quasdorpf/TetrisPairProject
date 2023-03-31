@@ -36,6 +36,8 @@ public class Clicker implements KeyListener, MouseListener {
 		}
 		System.out.println();
 		System.out.println();
+		
+		RunTetris.dropTimer.restart();
 	}
 	
 	public void mousePressed(MouseEvent e) {
