@@ -23,13 +23,5 @@ public class ShiftAction extends AbstractAction {
 		System.out.println();
 		System.out.println();
 	}
-	public class HoldAction extends AbstractAction {
-
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			grid.holdTetr();
-		}
-		
-	}
 
 }
