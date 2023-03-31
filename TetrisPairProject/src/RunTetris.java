@@ -34,14 +34,15 @@ public class RunTetris {
 		gamePanel = new GamePanel(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		clicker = new Clicker(grid);
 		gamePanel.addMouseListener(clicker);
-		
+		addAction("DOWN");
+		addAction("RIGHT");
+		addAction("LEFT");
 		
 	}
 	
 	public void playTetris() {
 		state = gameState.welcomeScreen;
 		currScore = 0;
-		
 		
 		screen.setContentPane(gamePanel);
 		screen.pack();
@@ -62,14 +63,12 @@ public class RunTetris {
 				
 			}
 			gamePanel.repaint();
-			screen.setContentPane(gamePanel);
 		}
 	};
 	Timer refreshTimer = new Timer(TIME_BETWEEN_ANIMATIONS, refresher);
 	
 	private static ActionListener dropper = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			System.out.println(true);
 			grid.fallTetr();
 		}
 	};
@@ -81,6 +80,13 @@ public class RunTetris {
 	
 	public static int getHeightPerc(double perc) {
 		return (int)((double)screen.getHeight() * perc);
+	}
+	
+	public static void addAction(String name){
+		Action newAction = new ShiftAction(name, grid);
+		KeyStroke key = KeyStroke.getKeyStroke(name);
+		gamePanel.getInputMap().put(key, name);
+		gamePanel.getActionMap().put(name, newAction);
 	}
 	
 	public static void main(String[] args) {
