@@ -79,13 +79,6 @@ public class Block {
 			int[] xCoordsD = {x, x+sideSize, x+size-sideSize, x+size};
 			int[] yCoordsD = {y+size, y+size-sideSize, y+size-sideSize, y+size};
 			g.fillPolygon(xCoordsD, yCoordsD, 4);
-		} else {
-			g.setColor(Color.GRAY);
-			g.drawRect(x, y, size, size);
-			g.drawRect(x+1, y+1, size-2, size-2);
-			
-			g.setColor(new Color(10, 10, 10)); // Very dark grey is better than absolute black
-			g.fillRect(x+2, y+2, size-3, size-3);
 		}
 	}
 	private void setLightShadedAndDarkColors() {

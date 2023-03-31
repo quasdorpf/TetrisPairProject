@@ -5,7 +5,7 @@ public class RunTetris {
 	private static final int DEFAULT_WIDTH = 800;
 	private static final int DEFAULT_HEIGHT = 600;
 	private static final int TIME_BETWEEN_ANIMATIONS = 10;
-	private static final int TIME_BETWEEN_DROPS = 10;
+	private static final int TIME_BETWEEN_DROPS = 1000;
 	
 	public static JFrame screen;
 	private static GamePanel gamePanel;
@@ -19,7 +19,8 @@ public class RunTetris {
 	
 	public enum gameState {
 		welcomeScreen,
-		playing
+		playing,
+		gameOver
 	}
 	public RunTetris() {
 		screen = new JFrame("Tetris");
@@ -30,7 +31,9 @@ public class RunTetris {
 		leaderboard = new Leaderboard();
 		grid = new Grid();
 		
-		
+		gamePanel = new GamePanel(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		clicker = new Clicker(grid);
+		gamePanel.addMouseListener(clicker);
 		
 		
 	}
@@ -39,13 +42,14 @@ public class RunTetris {
 		state = gameState.welcomeScreen;
 		currScore = 0;
 		
-		gamePanel = new GamePanel(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-		clicker = new Clicker(grid);
-		gamePanel.addMouseListener(clicker);
+		
 		screen.setContentPane(gamePanel);
 		screen.pack();
 		screen.setVisible(true);
 		refreshTimer.start();
+		
+		// temp
+		dropTimer.start();
 	}
 	
 	ActionListener refresher = new ActionListener() {
@@ -54,18 +58,30 @@ public class RunTetris {
 				
 			} else if (state == gameState.playing) {
 				
+			} else if (state == gameState.gameOver) {
+				
 			}
 			gamePanel.repaint();
+			screen.setContentPane(gamePanel);
 		}
 	};
 	Timer refreshTimer = new Timer(TIME_BETWEEN_ANIMATIONS, refresher);
 	
-	ActionListener dropper = new ActionListener() {
+	private static ActionListener dropper = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
-			
+			System.out.println(true);
+			grid.fallTetr();
 		}
 	};
-	Timer dropTimer = new Timer(TIME_BETWEEN_DROPS, dropper);
+	public static Timer dropTimer = new Timer(TIME_BETWEEN_DROPS, dropper);
+	
+	public static int getWidthPerc(double perc) {
+		return (int)((double)screen.getWidth() * perc);
+	}
+	
+	public static int getHeightPerc(double perc) {
+		return (int)((double)screen.getHeight() * perc);
+	}
 	
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
