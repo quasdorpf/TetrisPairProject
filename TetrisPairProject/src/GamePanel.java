@@ -37,8 +37,7 @@ public class GamePanel extends JPanel {
 			tetrs[i].draw(g, i*100+50, 50, 20);
 		}
 		*/
-		//welcomeScreen.display(g, screen, this);
-		drawGrid(g, RunTetris.getWidthPerc(0.05), RunTetris.getWidthPerc(0.05), blockSize);
+		welcomeScreen.display(g, screen, this);
 	}
 	
 	public void drawGridAndBackground(Graphics g) {
@@ -76,5 +75,4 @@ public class GamePanel extends JPanel {
 		g.setColor(new Color(10, 10, 10)); // Very dark grey is better than absolute black
 		g.fillRect(x+2, y+2, size-3, size-3);
 	}
-	
 }
