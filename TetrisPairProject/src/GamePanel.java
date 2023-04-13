@@ -44,7 +44,9 @@ public class GamePanel extends JPanel {
 	}
 	
 	public void drawGridAndBackground(Graphics g) {
-		
+		drawGrid(g, RunTetris.getWidthPerc(GamePanel.GRID_PERC_X), RunTetris.getHeightPerc(GamePanel.GRID_PERC_Y), 
+				GamePanel.blockSize);
+		drawGridOutlineDecoration(g);
 	}
 	
 	public void drawGameOverScreen(Graphics g) {
@@ -118,10 +120,10 @@ public class GamePanel extends JPanel {
 	}
 	
 	public static void drawGridOutlineDecoration(Graphics g) {
-		int x = RunTetris.getWidthPerc(GRID_PERC_X-0.013);
-		int y = RunTetris.getHeightPerc(GRID_PERC_Y-0.017);
-		int width = blockSize*10 + RunTetris.getWidthPerc(0.029);
-		int height = blockSize*20+RunTetris.getHeightPerc(0.039);
+		int x = RunTetris.getWidthPerc(GRID_PERC_X-0.024);
+		int y = RunTetris.getHeightPerc(GRID_PERC_Y-0.032);
+		int width = blockSize*10 + RunTetris.getWidthPerc(0.053);
+		int height = blockSize*20+RunTetris.getHeightPerc(0.073);
 		int arcWidth = RunTetris.getWidthPerc(0.04);
 		int arcHeight = RunTetris.getHeightPerc(0.04);
 		Color color = new Color(10, 10, 10);

@@ -9,8 +9,8 @@ public class RunTetris {
 	private static final int TIME_BETWEEN_DROPS = 1000;
 	
 	public static JFrame screen;
-	private static GamePanel gamePanel;
-	private static Clicker clicker;
+	public static GamePanel gamePanel;
+	public static Clicker clicker;
 	public static WelcomeScreen welcomeScreen;
 	public static Leaderboard leaderboard;
 	public static Grid grid;
@@ -41,7 +41,7 @@ public class RunTetris {
 		
 	}
 	
-	public void playTetris() {
+	public void playTetris() { // essentially a runWelcomeScreen
 		state = gameState.welcomeScreen;
 		currScore = 0;
 		
@@ -49,15 +49,21 @@ public class RunTetris {
 		screen.pack();
 		screen.setVisible(true);
 		refreshTimer.start();
+	}
+	
+	public void runPlaying() {
+		state = gameState.playing;
 		
-		// temp
 		dropTimer.start();
 	}
 	
 	ActionListener refresher = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			if (state == gameState.welcomeScreen) {
-				
+				if (welcomeScreen.checkSignal()) {
+					welcomeScreen.resetSignal();
+					runPlaying();
+				}
 			} else if (state == gameState.playing) {
 				
 			} else if (state == gameState.gameOver) {
