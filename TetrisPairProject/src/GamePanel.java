@@ -6,15 +6,15 @@ public class GamePanel extends JPanel {
 			new OTetromino(), new STetromino(), new TTetromino(), 
 			new ZTetromino()
 	};
-	private static final double BLOCK_PERC_SIZE = 0.04;
-	private static final double GRID_PERC_X = 0.32;
-	private static final double GRID_PERC_Y = 0.05;
+	public static final double BLOCK_PERC_SIZE = 0.04;
+	public static final double GRID_PERC_X = 0.32;
+	public static final double GRID_PERC_Y = 0.05;
 	
 	private JFrame screen = RunTetris.screen;
 	private WelcomeScreen welcomeScreen = RunTetris.welcomeScreen;
 	private Leaderboard leaderboard = RunTetris.leaderboard;
 	
-	private static int blockSize;
+	public static int blockSize;
 	
 	public GamePanel(int width, int height) {
 		setPreferredSize(new Dimension(width, height));
@@ -22,7 +22,7 @@ public class GamePanel extends JPanel {
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		blockSize = Math.min(RunTetris.getWidthPerc(BLOCK_PERC_SIZE), RunTetris.getHeightPerc(BLOCK_PERC_SIZE));
+		blockSize = RunTetris.getSizePerc(BLOCK_PERC_SIZE);
 		if (RunTetris.state == RunTetris.gameState.welcomeScreen) {
 			drawWelcomeScreenAndLeaderboard(g);
 		} else if (RunTetris.state == RunTetris.gameState.playing) {
@@ -38,8 +38,9 @@ public class GamePanel extends JPanel {
 			tetrs[i].draw(g, i*100+50, 50, 20);
 		}
 		*/
+		
 		welcomeScreen.display(g, screen, this);
-		drawGrid(g, RunTetris.getWidthPerc(GRID_PERC_X), RunTetris.getHeightPerc(GRID_PERC_Y), blockSize);
+		
 	}
 	
 	public void drawGridAndBackground(Graphics g) {
@@ -60,7 +61,7 @@ public class GamePanel extends JPanel {
 		}
 	}
 	
-	private void drawGridOutline(Graphics g, int x, int y, int xCount, int yCount, int blockSize) {
+	public static void drawGridOutline(Graphics g, int x, int y, int xCount, int yCount, int blockSize) {
 		g.setColor(Color.BLACK);
 		g.drawRect(x, y, (xCount*blockSize)+2, (yCount*blockSize)+2);
 		for (int i=0; i<yCount; i++) {
@@ -70,7 +71,7 @@ public class GamePanel extends JPanel {
 		}
 	}
 	
-	private void drawGridSquare(Graphics g, int x, int y, int size) {
+	private static void drawGridSquare(Graphics g, int x, int y, int size) {
 		g.setColor(Color.DARK_GRAY);
 		g.drawRect(x, y, size, size);
 		g.drawRect(x+1, y+1, size-2, size-2);
@@ -80,11 +81,23 @@ public class GamePanel extends JPanel {
 	}
 	
 	public static void drawLayeredRoundRect(Graphics g, int x, int y, int width, int height, int arcWidth, int arcHeight, 
-			int layers, Color startColor, int colInc) {
+			int layers, Color startColor, int colInc, boolean outToIn) {
 		g.setColor(startColor);
 		for (int i=0; i<layers; i++) {
 			for (int arcI=0; arcI<6; arcI++) {
-				g.drawRoundRect(x+i, y+i, width-(i*2), height-(i*2), arcWidth-arcI, arcHeight-arcI);
+				int finX, finY, finWidth, finHeight;
+				if (outToIn) {
+					finX = x+i;
+					finY = y+i;
+					finWidth = width-(i*2);
+					finHeight = height-(i*2);
+				} else {
+					finX = x-i;
+					finY = y-i;
+					finWidth = width+(i*2);
+					finHeight = height+(i*2);
+				}
+				g.drawRoundRect(finX, finY, finWidth, finHeight, arcWidth-arcI, arcHeight-arcI);
 			}
 			Color gCol = g.getColor();
 			int newRed = range(gCol.getRed()+colInc, 0, 255);
@@ -110,9 +123,11 @@ public class GamePanel extends JPanel {
 		int width = blockSize*10 + RunTetris.getWidthPerc(0.029);
 		int height = blockSize*20+RunTetris.getHeightPerc(0.039);
 		int arcWidth = RunTetris.getWidthPerc(0.04);
-		int arcHeight = RunTetris.getWidthPerc(0.04);
+		int arcHeight = RunTetris.getHeightPerc(0.04);
 		Color color = new Color(10, 10, 10);
-		drawLayeredRoundRect(g, x-5, y-5, width+10, height+10, arcWidth, arcHeight, 5, color, 0);
-		drawLayeredRoundRect(g, x, y, width, height, arcWidth, arcHeight, 20, color, 10);
+		drawLayeredRoundRect(g, x, y, width, height, arcWidth, arcHeight, RunTetris.getSizePerc(5.0/(double)RunTetris.DEFAULT_SIZE), 
+				color, 0, false);
+		drawLayeredRoundRect(g, x, y, width, height, arcWidth, arcHeight, RunTetris.getSizePerc(20.0/(double)RunTetris.DEFAULT_SIZE), 
+				color, RunTetris.getSizePerc(10.0/(double)RunTetris.DEFAULT_SIZE), true);
 	}
 }

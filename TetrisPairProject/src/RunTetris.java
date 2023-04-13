@@ -2,8 +2,9 @@ import javax.swing.*;
 import java.awt.event.*;
 
 public class RunTetris {
-	private static final int DEFAULT_WIDTH = 800;
-	private static final int DEFAULT_HEIGHT = 600;
+	public static final int DEFAULT_WIDTH = 800;
+	public static final int DEFAULT_HEIGHT = 600;
+	public static final int DEFAULT_SIZE = Math.min(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	private static final int TIME_BETWEEN_ANIMATIONS = 10;
 	private static final int TIME_BETWEEN_DROPS = 1000;
 	
@@ -80,6 +81,10 @@ public class RunTetris {
 	
 	public static int getHeightPerc(double perc) {
 		return (int)((double)screen.getHeight() * perc);
+	}
+	
+	public static int getSizePerc(double perc) {
+		return Math.min(getWidthPerc(perc), getHeightPerc(perc));
 	}
 	
 	public static void addAction(String name){
