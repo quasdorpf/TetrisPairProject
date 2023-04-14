@@ -19,11 +19,11 @@ public class WelcomeScreen {
 		int imgSize = RunTetris.getSizePerc(0.25);
 		g.drawImage(new ImageIcon("Imgs/tetris-logo.png").getImage(), RunTetris.getWidthPerc(0.35), RunTetris.getHeightPerc(0.2), 
 				imgSize+RunTetris.getSizePerc(0.0595), imgSize, gamePanel);
-		playButton.move(RunTetris.getWidthPerc(0.35), RunTetris.getHeightPerc(0.5));
-		playButton.resize(RunTetris.getSizePerc(0.25), RunTetris.getSizePerc(0.08));
+		playButton.setBounds(RunTetris.getWidthPerc(0.35), RunTetris.getHeightPerc(0.5), RunTetris.getSizePerc(0.25), 
+				RunTetris.getSizePerc(0.08));
 		gamePanel.add(playButton);
 		if (!reSized) {
-			RunTetris.screen.resize(RunTetris.DEFAULT_WIDTH, RunTetris.DEFAULT_HEIGHT);
+			RunTetris.screen.setSize(RunTetris.DEFAULT_WIDTH, RunTetris.DEFAULT_HEIGHT);
 			reSized = true;
 		}
 	}

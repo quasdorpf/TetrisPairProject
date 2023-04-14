@@ -120,16 +120,17 @@ public class GamePanel extends JPanel {
 	}
 	
 	public static void drawGridOutlineDecoration(Graphics g) {
-		int x = RunTetris.getWidthPerc(GRID_PERC_X-0.024);
-		int y = RunTetris.getHeightPerc(GRID_PERC_Y-0.032);
-		int width = blockSize*10 + RunTetris.getWidthPerc(0.053);
-		int height = blockSize*20+RunTetris.getHeightPerc(0.073);
+		int x = RunTetris.getWidthPerc(GRID_PERC_X);
+		int y = RunTetris.getHeightPerc(GRID_PERC_Y);
+		int width = blockSize*10 + RunTetris.getWidthPerc(0);
+		int height = blockSize*20+RunTetris.getHeightPerc(0);
 		int arcWidth = RunTetris.getWidthPerc(0.04);
 		int arcHeight = RunTetris.getHeightPerc(0.04);
-		Color color = new Color(10, 10, 10);
-		drawLayeredRoundRect(g, x, y, width, height, arcWidth, arcHeight, RunTetris.getSizePerc(5.0/(double)RunTetris.DEFAULT_SIZE), 
-				color, 0, false);
-		drawLayeredRoundRect(g, x, y, width, height, arcWidth, arcHeight, RunTetris.getSizePerc(20.0/(double)RunTetris.DEFAULT_SIZE), 
-				color, RunTetris.getSizePerc(10.0/(double)RunTetris.DEFAULT_SIZE), true);
+		int layers = RunTetris.getSizePerc(25.0/(double)RunTetris.DEFAULT_SIZE);
+		int colInc = RunTetris.getSizePerc(-7.0/(double)RunTetris.DEFAULT_SIZE);
+		int rgb = range((-colInc)*(layers-RunTetris.getSizePerc(5.0/(double)RunTetris.DEFAULT_SIZE)), 0, 255);
+		Color color = new Color(rgb, rgb, rgb);
+		drawLayeredRoundRect(g, x, y, width, height, arcWidth, arcHeight, layers, 
+				color, colInc, false);
 	}
 }
