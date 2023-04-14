@@ -43,10 +43,10 @@ public class ZTetromino extends Tetromino {
 		rotation[0][3] = new Block(color,new int[] {1,2});
 		
 		// 1 - RIGHT
-		rotation[1][0] = new Block(color,new int[] {2,1});
-		rotation[1][1] = new Block(color,new int[] {1,1});
-		rotation[1][2] = new Block(color,new int[] {2,1});
-		rotation[1][3] = new Block(color,new int[] {1,2});
+		rotation[1][0] = new Block(color,new int[] {1,1});
+		rotation[1][1] = new Block(color,new int[] {2,1});
+		rotation[1][2] = new Block(color,new int[] {1,2});
+		rotation[1][3] = new Block(color,new int[] {0,2});
 		
 		// 2 - DOWN
 		rotation[2][0] = new Block(color,new int[] {1,0});
@@ -58,7 +58,7 @@ public class ZTetromino extends Tetromino {
 		rotation[3][0] = new Block(color,new int[] {1,0});
 		rotation[3][1] = new Block(color,new int[] {0,1});
 		rotation[3][2] = new Block(color,new int[] {1,1});
-		rotation[3][3] = new Block(color,new int[] {2,1});
+		rotation[3][3] = new Block(color,new int[] {2,0});
 
 		setRotations(rotations);
 		setRotation(rotation);

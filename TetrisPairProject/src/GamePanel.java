@@ -7,8 +7,8 @@ public class GamePanel extends JPanel {
 			new ZTetromino()
 	};
 	public static final double BLOCK_PERC_SIZE = 0.04;
-	public static final double GRID_PERC_X = 0.32;
-	public static final double GRID_PERC_Y = 0.05;
+	public static final double GRID_X_PERC = 0.32;
+	public static final double GRID_Y_PERC = 0.05;
 	
 	private JFrame screen = RunTetris.screen;
 	private WelcomeScreen welcomeScreen = RunTetris.welcomeScreen;
@@ -44,9 +44,15 @@ public class GamePanel extends JPanel {
 	}
 	
 	public void drawGridAndBackground(Graphics g) {
-		drawGrid(g, RunTetris.getWidthPerc(GamePanel.GRID_PERC_X), RunTetris.getHeightPerc(GamePanel.GRID_PERC_Y), 
-				GamePanel.blockSize);
 		drawGridOutlineDecoration(g);
+		drawGrid(g, RunTetris.getWidthPerc(GamePanel.GRID_X_PERC), RunTetris.getHeightPerc(GamePanel.GRID_Y_PERC), 
+				GamePanel.blockSize);
+		
+		// Next Tetrominoes
+		
+		
+		// Held Tetromino
+		
 	}
 	
 	public void drawGameOverScreen(Graphics g) {
@@ -109,19 +115,9 @@ public class GamePanel extends JPanel {
 		}
 	}
 	
-	private static int range(int num, int min, int max) {
-		if (num < min) {
-			return min;
-		} else if (num > max) {
-			return max;
-		} else {
-			return num;
-		}
-	}
-	
 	public static void drawGridOutlineDecoration(Graphics g) {
-		int x = RunTetris.getWidthPerc(GRID_PERC_X);
-		int y = RunTetris.getHeightPerc(GRID_PERC_Y);
+		int x = RunTetris.getWidthPerc(GRID_X_PERC);
+		int y = RunTetris.getHeightPerc(GRID_Y_PERC);
 		int width = blockSize*10 + RunTetris.getWidthPerc(0);
 		int height = blockSize*20+RunTetris.getHeightPerc(0);
 		int arcWidth = RunTetris.getWidthPerc(0.04);
@@ -132,5 +128,19 @@ public class GamePanel extends JPanel {
 		Color color = new Color(rgb, rgb, rgb);
 		drawLayeredRoundRect(g, x, y, width, height, arcWidth, arcHeight, layers, 
 				color, colInc, false);
+	}
+	
+	private static int range(int num, int min, int max) {
+		if (num < min) {
+			return min;
+		} else if (num > max) {
+			return max;
+		} else {
+			return num;
+		}
+	}
+	
+	private static double specNumInPerc(int num) {
+		return ((double)num/(double)RunTetris.DEFAULT_SIZE);
 	}
 }
