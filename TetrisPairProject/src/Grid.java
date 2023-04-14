@@ -1,4 +1,7 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.*;
+import javax.swing.Timer;
 
 public class Grid {
 	private Tetromino currTetr;
@@ -6,6 +9,8 @@ public class Grid {
 	private ArrayList<Tetromino> nextTetr;
 	private Block[][] visibleGrid;
 	private Block[][] grid;
+	Timer clearTimer;
+	Timer dropTimer;
 	private int score;
 	
 	Grid(){
@@ -71,21 +76,29 @@ public class Grid {
 	}
 	public void setTetr() {
 		ArrayList<Integer> clearRows = new ArrayList<Integer>();
-		boolean canClear = true;
 		for(Block block:currTetr.getBlocks()) {
+		boolean canClear = true;
 			grid[block.getY()][block.getX()] = block;
 			for (int j=0;j<10;j++) {
 				canClear&=!grid[block.getY()][j].isEmpty();
+				System.out.println(!grid[block.getY()][j].isEmpty());
 			}
+			System.out.println("-----BOTH------");
+			System.out.println(canClear);
+			System.out.println(!clearRows.contains(block.getY()));
+			System.out.println("------ONE------");
 			if(canClear&&!clearRows.contains(block.getY())) {
 				clearRows.add(block.getY());
 			}
 		}
-		clearRows(clearRows);
-		dropTetr(nextTetr.get(0));
-		nextTetr.remove(0);
-		nextTetr.add(Tetromino.getRandomTetromino());
-		
+		System.out.println("-----NEXT------");
+		if (clearRows.size()>0) {
+			clearRows(clearRows);
+		}else {
+			dropTetr(nextTetr.get(0));
+			nextTetr.remove(0);
+			nextTetr.add(Tetromino.getRandomTetromino());
+		}
 	}
 	public Block[][] makeVisible() {
 		Block[][] visibleGrid = new Block[20][10];
@@ -99,8 +112,48 @@ public class Grid {
 		}
 		return visibleGrid;
 	}
-	private void clearRows(ArrayList<Integer> rows) {
-		
+	public void addDropTimer(Timer dropTimer) {
+		this.dropTimer = dropTimer;
+	}
+	private ArrayList<Integer> clearRows(ArrayList<Integer> rows) {
+		if(dropTimer!=null)
+			dropTimer.stop();
+		currTetr = new EmptyTetromino();
+		for (int row:rows)
+			for(int j=0;j<grid[0].length;j++){
+				grid[row][j] = new Block();
+			}
+		ActionListener action = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				while (rows.size()>0) {
+					int bottomRow = rows.get(rows.size()-1);
+					System.out.println(bottomRow);
+					for (int i=bottomRow;i>0;i--)
+						grid[i] = grid[i-1];
+					rows.remove(rows.size()-1);
+				}
+				clearTimer.stop();
+				if(dropTimer!=null)
+					dropTimer.start();
+				dropTetr(nextTetr.get(0));
+				nextTetr.remove(0);
+				nextTetr.add(Tetromino.getRandomTetromino());
+			}
+		};
+		clearTimer = new Timer(50,action);
+		clearTimer.setRepeats(true);
+		clearTimer.start();
+		return rows;
+	}
+	private void fallRows(ArrayList<Integer> rows) {
+		while (rows.size()>0) {
+			int bottomRow = -1;
+			for(int row:rows)
+				if (row>bottomRow)
+					bottomRow = row;
+			for (int i=1;i<bottomRow;i++)
+				grid[bottomRow] = grid[bottomRow-1];
+		}
 	}
 	public Block[][] getGrid(){
 		return grid.clone();

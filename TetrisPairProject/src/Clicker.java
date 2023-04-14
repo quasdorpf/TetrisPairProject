@@ -29,13 +29,13 @@ public class Clicker implements KeyListener, MouseListener {
 //		if (e.getKeyChar()==KeyEvent.VK_SPACE)
 			grid.fallTetr();
 		visibleGrid = grid.makeVisible();
-		for (Block[] row: visibleGrid) {
-			for (Block block: row)
-				System.out.print(block.isEmpty()+"  ");
-			System.out.println();
-		}
-		System.out.println();
-		System.out.println();
+//		for (Block[] row: visibleGrid) {
+//			for (Block block: row)
+//				System.out.print(block.isEmpty()+"  ");
+//			System.out.println();
+//		}
+//		System.out.println();
+//		System.out.println();
 		
 		RunTetris.dropTimer.restart();
 	}

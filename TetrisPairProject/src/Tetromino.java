@@ -69,7 +69,7 @@ public abstract class Tetromino {
 		position[1] += col;
 		for(Block[] rot:rotation) {
 			for (Block block:rot) {
-				System.out.println(col);
+//				System.out.println(col);
 				block.shiftCoords(row, col);
 			}
 		}

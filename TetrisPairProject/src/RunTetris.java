@@ -38,6 +38,11 @@ public class RunTetris {
 		addAction("DOWN");
 		addAction("RIGHT");
 		addAction("LEFT");
+		Action newAction = new RotateAction(grid, 1);
+		KeyStroke key = KeyStroke.getKeyStroke("UP");
+		gamePanel.getInputMap().put(key, "UP");
+		gamePanel.getActionMap().put("UP", newAction);
+		
 		
 	}
 	

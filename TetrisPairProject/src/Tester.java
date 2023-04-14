@@ -29,6 +29,9 @@ public class Tester{
 		addAction("DOWN");
 		addAction("RIGHT");
 		addAction("LEFT");
+		KeyStroke key = KeyStroke.getKeyStroke("UP");
+		p.getInputMap().put(key, "UP");
+		p.getActionMap().put("UP", new RotateAction(g, 1));
 		f.add(p);
 		f.setSize(200, 200);
 		f.setVisible(true);
