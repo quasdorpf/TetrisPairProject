@@ -67,11 +67,24 @@ public class GamePanel extends JPanel {
 		g.drawString("Next", x+(width/3), y+RunTetris.getHeightPerc(0.04));
 		int tetrX = x+(int)((double)width/5);
 		for (int i=0; i<3; i++) {
-			RunTetris.grid.getNextTetromino(i).draw(g, tetrX, y+RunTetris.getHeightPerc(0.06+(i*0.12)), blockSize);
+			RunTetris.grid.getNextTetr(i).draw(g, tetrX, y+RunTetris.getHeightPerc(0.06+(i*0.12)), blockSize);
 		}
 		
 		// Held Tetromino
-		
+		width = RunTetris.getSizePerc(0.15);
+		height = RunTetris.getSizePerc(0.3);
+		x = RunTetris.getWidthPerc(GRID_X_PERC-0.18);
+		y = RunTetris.getHeightPerc(GRID_Y_PERC);
+		drawLayeredRoundRect(g, x, y, width, height, arcWidth, arcHeight, RunTetris.getSizePerc(specNumInPerc(10)), Color.BLACK,
+				RunTetris.getSizePerc(specNumInPerc(7)), false);
+		g.setColor(Color.WHITE);
+		g.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
+		g.setColor(Color.BLACK);
+		g.drawString("Hold", x+(int)((double)width/3.5), y+RunTetris.getHeightPerc(0.04));
+		Tetromino heldTetr = RunTetris.grid.getHeldTetr();
+		if (heldTetr != null) {
+			heldTetr.draw(g, x+(int)((double)width/5), y+RunTetris.getHeightPerc(0.06), blockSize);
+		}
 	}
 	
 	public void drawGameOverScreen(Graphics g) {
