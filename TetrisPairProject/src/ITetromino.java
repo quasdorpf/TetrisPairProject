@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.*;
 
 public class ITetromino extends Tetromino {
 	private static final Color color = Color.CYAN;
@@ -42,5 +43,8 @@ public class ITetromino extends Tetromino {
 	}
 	public Tetromino getNewTetromino() {
 		return new ITetromino();
+	}
+	public void draw(Graphics g, int x, int y, int blockSize) {
+		super.draw(g, x-(blockSize/2), y, blockSize);
 	}
 }

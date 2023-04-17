@@ -65,7 +65,10 @@ public class GamePanel extends JPanel {
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Serif", Font.PLAIN, RunTetris.getSizePerc(specNumInPerc(20))));
 		g.drawString("Next", x+(width/3), y+RunTetris.getHeightPerc(0.04));
-		
+		int tetrX = x+(int)((double)width/5);
+		for (int i=0; i<3; i++) {
+			RunTetris.grid.getNextTetromino(i).draw(g, tetrX, y+RunTetris.getHeightPerc(0.06+(i*0.12)), blockSize);
+		}
 		
 		// Held Tetromino
 		
