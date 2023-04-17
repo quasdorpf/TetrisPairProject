@@ -161,4 +161,11 @@ public class Grid {
 	public Block[][] getGrid(){
 		return grid.clone();
 	}
+	public Tetromino getNextTetromino(int index) {
+		if (index < 0 || index >= nextTetr.size()) {
+			return null;
+		} else {
+			return nextTetr.get(index);
+		}
+	}
 }
