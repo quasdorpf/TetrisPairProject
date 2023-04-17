@@ -68,6 +68,7 @@ public class Grid {
 	public void holdTetr() {
 		if (!holding) {
 		if (heldTetr == null) {
+			heldTetr = currTetr.getNewTetromino();
 			dropTetr(nextTetr.get(0));
 			nextTetr.remove(0);
 			nextTetr.add(Tetromino.getRandomTetromino());
