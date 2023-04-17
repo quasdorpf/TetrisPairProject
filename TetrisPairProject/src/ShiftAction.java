@@ -16,14 +16,14 @@ public class ShiftAction extends AbstractAction {
 		} else {
 			grid.shiftTetr(name.charAt(0));
 		}
-		Block[][] visibleGrid = grid.makeVisible();
-		for (Block[] row: visibleGrid) {
-			for (Block block: row)
-				System.out.print(block.isEmpty()+"  ");
-			System.out.println();
-		}
-		System.out.println();
-		System.out.println();
+//		Block[][] visibleGrid = grid.makeVisible();
+//		for (Block[] row: visibleGrid) {
+//			for (Block block: row)
+//				System.out.print(block.isEmpty()+"  ");
+//			System.out.println();
+//		}
+//		System.out.println();
+//		System.out.println();
 	}
 
 }

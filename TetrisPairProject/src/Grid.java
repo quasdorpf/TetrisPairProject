@@ -81,17 +81,17 @@ public class Grid {
 			grid[block.getY()][block.getX()] = block;
 			for (int j=0;j<10;j++) {
 				canClear&=!grid[block.getY()][j].isEmpty();
-				System.out.println(!grid[block.getY()][j].isEmpty());
+				//System.out.println(!grid[block.getY()][j].isEmpty());
 			}
-			System.out.println("-----BOTH------");
-			System.out.println(canClear);
-			System.out.println(!clearRows.contains(block.getY()));
-			System.out.println("------ONE------");
+			//System.out.println("-----BOTH------");
+			//System.out.println(canClear);
+			//System.out.println(!clearRows.contains(block.getY()));
+			//System.out.println("------ONE------");
 			if(canClear&&!clearRows.contains(block.getY())) {
 				clearRows.add(block.getY());
 			}
 		}
-		System.out.println("-----NEXT------");
+		//System.out.println("-----NEXT------");
 		if (clearRows.size()>0) {
 			clearRows(clearRows);
 		}else {
@@ -125,12 +125,15 @@ public class Grid {
 			}
 		ActionListener action = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				int shift = 0;
 				while (rows.size()>0) {
 					int bottomRow = rows.get(rows.size()-1);
 					System.out.println(bottomRow);
 					for (int i=bottomRow;i>0;i--)
-						grid[i] = grid[i-1];
+						grid[i+shift] = grid[i+shift-1];
 					rows.remove(rows.size()-1);
+					System.out.println(shift);
+					shift++;
 				}
 				clearTimer.stop();
 				if(dropTimer!=null)
