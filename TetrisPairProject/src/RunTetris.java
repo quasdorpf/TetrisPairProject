@@ -42,6 +42,10 @@ public class RunTetris {
 		KeyStroke key = KeyStroke.getKeyStroke("UP");
 		gamePanel.getInputMap().put(key, "UP");
 		gamePanel.getActionMap().put("UP", newAction);
+		newAction = new HoldAction(grid);
+		key = KeyStroke.getKeyStroke("C");
+		gamePanel.getInputMap().put(key, "C");
+		gamePanel.getActionMap().put("C", newAction);
 		
 		
 	}

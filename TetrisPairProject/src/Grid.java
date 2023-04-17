@@ -12,9 +12,11 @@ public class Grid {
 	Timer clearTimer;
 	Timer dropTimer;
 	private int score;
+	private boolean holding;
 	
 	Grid(){
 		grid = new Block[20][10];
+		holding = true;
 		nextTetr = new ArrayList<Tetromino>();
 		for(int i=0;i<grid.length;i++){
 			for(int j=0;j<grid[0].length;j++){
@@ -64,6 +66,7 @@ public class Grid {
 		currTetr.rotate(leftorRight);
 	}
 	public void holdTetr() {
+		if (!holding) {
 		if (heldTetr == null) {
 			dropTetr(nextTetr.get(0));
 			nextTetr.remove(0);
@@ -72,6 +75,8 @@ public class Grid {
 			Tetromino tempTetr = currTetr;
 			dropTetr(heldTetr);
 			heldTetr = tempTetr.getNewTetromino();
+		}
+		holding = true;
 		}
 	}
 	public void setTetr() {
@@ -99,6 +104,7 @@ public class Grid {
 			nextTetr.remove(0);
 			nextTetr.add(Tetromino.getRandomTetromino());
 		}
+		holding = false;
 	}
 	public Block[][] makeVisible() {
 		Block[][] visibleGrid = new Block[20][10];
