@@ -16,7 +16,7 @@ public class RunTetris {
 	public static Grid grid;
 	public static gameState state;
 	
-	private int currScore;
+	private static int score;
 	
 	public enum gameState {
 		welcomeScreen,
@@ -52,7 +52,7 @@ public class RunTetris {
 	
 	public void playTetris() { // essentially a runWelcomeScreen
 		state = gameState.welcomeScreen;
-		currScore = 0;
+		score = 0;
 		
 		screen.setContentPane(gamePanel);
 		screen.pack();
@@ -107,6 +107,14 @@ public class RunTetris {
 		KeyStroke key = KeyStroke.getKeyStroke(name);
 		gamePanel.getInputMap().put(key, name);
 		gamePanel.getActionMap().put(name, newAction);
+	}
+	
+	public static int getScore() {
+		return score;
+	}
+	
+	public static void incScore(int amount) {
+		score += amount;
 	}
 	
 	public static void main(String[] args) {

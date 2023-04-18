@@ -125,6 +125,15 @@ public class Grid {
 	private ArrayList<Integer> clearRows(ArrayList<Integer> rows) {
 		if(dropTimer!=null)
 			dropTimer.stop();
+		if (rows.size() == 1) {
+			RunTetris.incScore(40);
+		} else if (rows.size() == 2) {
+			RunTetris.incScore(100);
+		} else if (rows.size() == 3) {
+			RunTetris.incScore(300);
+		} else if (rows.size() == 4) {
+			RunTetris.incScore(1200);
+		}
 		currTetr = new EmptyTetromino();
 		for (int row:rows)
 			for(int j=0;j<grid[0].length;j++){
