@@ -31,6 +31,7 @@ public class GamePanel extends JPanel {
 		} else if (RunTetris.state == RunTetris.gameState.playing) {
 			drawGridAndBackground(g);
 		} else if (RunTetris.state == RunTetris.gameState.gameOver) {
+			drawGridAndBackground(g);
 			drawGameOverScreen(g);
 		}
 	}
@@ -99,7 +100,7 @@ public class GamePanel extends JPanel {
 	}
 	
 	public void drawGameOverScreen(Graphics g) {
-		
+		g.fillRect(100, 100, 100, 100);
 	}
 	
 	private void drawGrid(Graphics g, int x, int y, int blockSize) {

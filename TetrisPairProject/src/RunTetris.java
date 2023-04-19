@@ -106,6 +106,7 @@ public class RunTetris {
 		Action newAction = new ShiftAction(name, grid);
 		KeyStroke key = KeyStroke.getKeyStroke(name);
 		gamePanel.getInputMap().put(key, name);
+		//gamePanel.getInputMap().remove(key);
 		gamePanel.getActionMap().put(name, newAction);
 	}
 	
@@ -115,6 +116,13 @@ public class RunTetris {
 	
 	public static void incScore(int amount) {
 		score += amount;
+	}
+	
+	public static void endGame() {
+		if (state == gameState.playing) {
+			state = gameState.gameOver;
+			dropTimer.stop();
+		}
 	}
 	
 	public static void main(String[] args) {

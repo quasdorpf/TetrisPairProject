@@ -29,7 +29,11 @@ public class Grid {
 			nextTetr.add(Tetromino.getRandomTetromino());
 	}
 	public void dropTetr(Tetromino tetr) {
-		currTetr = tetr;
+		if (!testTetrPlacement(tetr, 0, 0)) {
+			RunTetris.endGame();
+		} else {
+			currTetr = tetr;
+		}
 	}
 	public void fallTetr() {
 		boolean stop = false;
@@ -186,5 +190,15 @@ public class Grid {
 	}
 	public Tetromino getHeldTetr() {
 		return heldTetr;
+	}
+	private boolean testTetrPlacement(Tetromino tetr, int x, int y) {
+		Block[] rot = tetr.getBlocks();
+		for (int i=0; i<rot.length; i++) {
+			Block gridBlock = grid[y+rot[i].getY()][x+rot[i].getX()];
+			if (!gridBlock.isEmpty()) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
