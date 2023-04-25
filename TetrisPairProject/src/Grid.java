@@ -67,7 +67,29 @@ public class Grid {
 			currTetr.shift(dir);}
 	}
 	public void rotate(int leftorRight) {
-		currTetr.rotate(leftorRight);
+		boolean rotationWorks = false;
+		Tetromino tetr = null;
+		for (int i=0;i<5;i++) {
+			if(!rotationWorks) {
+				Tetromino tempTetr = currTetr.testRotate(i, leftorRight);
+				boolean canPlace = true;
+				for(Block block: tempTetr.getBlocks()) {
+					boolean place=(block.getY()<20&&block.getY()>-1&&block.getX()<10&&block.getX()>-1);
+					System.out.println("place: "+place);
+					if(place)
+						place&=grid[block.getY()][block.getX()].isEmpty();
+					canPlace&=place;
+					System.out.println("Can Place: "+canPlace);
+				}
+				//System.out.println(canPlace);
+				if (canPlace) {
+					rotationWorks = true;
+					tetr = tempTetr;
+				}
+			}
+		}
+		if (tetr!=null)
+			currTetr = tetr;
 	}
 	public void holdTetr() {
 		if (!holding) {
@@ -194,6 +216,7 @@ public class Grid {
 	private boolean testTetrPlacement(Tetromino tetr, int x, int y) {
 		Block[] rot = tetr.getBlocks();
 		for (int i=0; i<rot.length; i++) {
+			
 			Block gridBlock = grid[y+rot[i].getY()][x+rot[i].getX()];
 			if (!gridBlock.isEmpty()) {
 				return false;

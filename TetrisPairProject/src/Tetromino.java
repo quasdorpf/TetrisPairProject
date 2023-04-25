@@ -49,6 +49,70 @@ public abstract class Tetromino {
 	public Block[][] getRotation() {
 		return rotations[currRotation];
 	}
+	public Tetromino testRotate(int testCase, int dir) {
+		Tetromino test =  getNewTetromino();
+		test.setBlockPosition(getY()-test.getY(), getX()-test.getX());
+		for (int i=0;i<currRotation+dir;i++)
+			test.rotate(1);
+		if (currRotation==0&&dir==1) {
+			if (testCase==0)
+				test.setBlockPosition(0, 0);
+				else if (testCase==1)test.setBlockPosition(1, 0);
+				else if (testCase==2)test.setBlockPosition(1, -1);
+				else if (testCase==3)test.setBlockPosition(0, 2);
+				else if (testCase==4)test.setBlockPosition(1, 2);
+		}else if(currRotation==1&&dir==-1) {
+			if (testCase==0)
+				test.setBlockPosition(0, 0);
+				else if (testCase==1)test.setBlockPosition(-1, 0);
+				else if (testCase==2)test.setBlockPosition(-1, 1);
+				else if (testCase==3)test.setBlockPosition(0, -2);
+				else if (testCase==4)test.setBlockPosition(-1, -2);
+		}else if(currRotation==1&&dir==1) {
+			if (testCase==0)
+				test.setBlockPosition(0, 0);
+				else if (testCase==1)test.setBlockPosition(-1, 0);
+				else if (testCase==2)test.setBlockPosition(-1, 1);
+				else if (testCase==3)test.setBlockPosition(0, -2);
+				else if (testCase==4)test.setBlockPosition(-1, -2);
+		}else if(currRotation==2&&dir==-1) {
+			if (testCase==0)
+				test.setBlockPosition(0, 0);
+				else if (testCase==1)test.setBlockPosition(1, 0);
+				else if (testCase==2)test.setBlockPosition(1, -1);
+				else if (testCase==3)test.setBlockPosition(0, 2);
+				else if (testCase==4)test.setBlockPosition(1, 2);
+		}else if(currRotation==2&&dir==1) {
+			if (testCase==0)
+				test.setBlockPosition(0, 0);
+				else if (testCase==1)test.setBlockPosition(-1, 0);
+				else if (testCase==2)test.setBlockPosition(-1, -1);
+				else if (testCase==3)test.setBlockPosition(0, 2);
+				else if (testCase==4)test.setBlockPosition(-1, 2);
+		}else if(currRotation==3&&dir==-1) {
+			if (testCase==0)
+				test.setBlockPosition(0, 0);
+				else if (testCase==1)test.setBlockPosition(1, 0);
+				else if (testCase==2)test.setBlockPosition(1, 1);
+				else if (testCase==3)test.setBlockPosition(0, -2);
+				else if (testCase==4)test.setBlockPosition(1, -2);
+		}else if(currRotation==3&&dir==1) {
+			if (testCase==0)
+				test.setBlockPosition(0, 0);
+				else if (testCase==1)test.setBlockPosition(1, 0);
+				else if (testCase==2)test.setBlockPosition(1, -1);
+				else if (testCase==3)test.setBlockPosition(0, -2);
+				else if (testCase==4)test.setBlockPosition(1, -2);
+		}else if(currRotation==0&&dir==-1) {
+			if (testCase==0)
+				test.setBlockPosition(0, 0);
+				else if (testCase==1)test.setBlockPosition(-1, 0);
+				else if (testCase==2)test.setBlockPosition(-1, -1);
+				else if (testCase==3)test.setBlockPosition(0, 2);
+				else if (testCase==4)test.setBlockPosition(-1, 2);
+		}
+		return test;
+	}
 	public Block[] getBlocks() {
 		return rotation[currRotation];
 	}
@@ -63,6 +127,9 @@ public abstract class Tetromino {
 		default:;
 		}
 		
+	}
+	public int getRotationNum() {
+		return currRotation;
 	}
 	public void setBlockPosition(int row, int col) {
 		position[0] += row;
