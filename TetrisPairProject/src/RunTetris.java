@@ -16,6 +16,8 @@ public class RunTetris {
 	public static Grid grid;
 	public static gameState state;
 	
+	public static JButton playButton;
+	
 	private static int score;
 	
 	public enum gameState {
@@ -28,25 +30,18 @@ public class RunTetris {
 		screen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		screen.setResizable(true);
 		
-		welcomeScreen = new WelcomeScreen();
-		leaderboard = new Leaderboard();
 		grid = new Grid();
 		
-		gamePanel = new GamePanel(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		clicker = new Clicker(grid);
-		gamePanel.addMouseListener(clicker);
-		addAction("DOWN");
-		addAction("RIGHT");
-		addAction("LEFT");
-		Action newAction = new RotateAction(grid, 1);
-		KeyStroke key = KeyStroke.getKeyStroke("UP");
-		gamePanel.getInputMap().put(key, "UP");
-		gamePanel.getActionMap().put("UP", newAction);
-		newAction = new HoldAction(grid);
-		key = KeyStroke.getKeyStroke("C");
-		gamePanel.getInputMap().put(key, "C");
-		gamePanel.getActionMap().put("C", newAction);
 		
+		welcomeScreen = new WelcomeScreen();
+		leaderboard = new Leaderboard();
+		
+		gamePanel = new GamePanel(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+		gamePanel.addMouseListener(clicker);
+		
+		// For initiating actions
+		addRotateAction("UP");
 		
 	}
 	
@@ -58,19 +53,38 @@ public class RunTetris {
 		screen.pack();
 		screen.setVisible(true);
 		refreshTimer.start();
+		
+		
 	}
 	
 	public void runPlaying() {
 		state = gameState.playing;
 		
+		addShiftAction("DOWN");
+		addShiftAction("RIGHT");
+		addShiftAction("LEFT");
+		addRotateAction("UP");
+		addHoldAction("C");
+		
 		dropTimer.start();
+	}
+	
+	public static void endGame() {
+		removeAction("DOWN");
+		removeAction("RIGHT");
+		removeAction("LEFT");
+		removeAction("UP");
+		removeAction("C");
+		
+		state = gameState.gameOver;
+		dropTimer.stop();
 	}
 	
 	ActionListener refresher = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			if (state == gameState.welcomeScreen) {
 				if (welcomeScreen.checkSignal()) {
-					welcomeScreen.resetSignal();
+					welcomeScreen.setSignal(false);
 					runPlaying();
 				}
 			} else if (state == gameState.playing) {
@@ -102,12 +116,30 @@ public class RunTetris {
 		return Math.min(getWidthPerc(perc), getHeightPerc(perc));
 	}
 	
-	public static void addAction(String name){
+	private static void addShiftAction(String name){
 		Action newAction = new ShiftAction(name, grid);
 		KeyStroke key = KeyStroke.getKeyStroke(name);
 		gamePanel.getInputMap().put(key, name);
-		//gamePanel.getInputMap().remove(key);
 		gamePanel.getActionMap().put(name, newAction);
+	}
+	
+	private static void addRotateAction(String name) {
+		Action newAction = new RotateAction(grid, 1);
+		KeyStroke key = KeyStroke.getKeyStroke(name);
+		gamePanel.getInputMap().put(key, name);
+		gamePanel.getActionMap().put(name, newAction);
+	}
+	
+	private static void addHoldAction(String name) {
+		Action newAction = new HoldAction(grid);
+		KeyStroke key = KeyStroke.getKeyStroke(name);
+		gamePanel.getInputMap().put(key, name);
+		gamePanel.getActionMap().put(name, newAction);
+	}
+	
+	private static void removeAction(String name) {
+		KeyStroke key = KeyStroke.getKeyStroke(name);
+		gamePanel.getInputMap().remove(key);
 	}
 	
 	public static int getScore() {
@@ -116,14 +148,7 @@ public class RunTetris {
 	
 	public static void incScore(int amount) {
 		score += amount;
-	}
-	
-	public static void endGame() {
-		if (state == gameState.playing) {
-			state = gameState.gameOver;
-			dropTimer.stop();
-		}
-	}
+	}	
 	
 	public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {

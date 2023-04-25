@@ -1,6 +1,6 @@
 import java.awt.event.*;
 
-public class Clicker implements KeyListener, MouseListener {
+public class Clicker implements KeyListener, MouseListener, ActionListener {
 	Grid grid;
 	Block[][] visibleGrid;
 	Clicker(Grid g){
@@ -54,6 +54,14 @@ public class Clicker implements KeyListener, MouseListener {
 	
 	public void mouseExited(MouseEvent e) {
 		
+	}
+	
+	public void actionPerformed(ActionEvent e) {
+		String actionCommand = e.getActionCommand();
+		if (actionCommand.equals("Play")) {
+			RunTetris.welcomeScreen.setSignal(true);
+			RunTetris.gamePanel.remove(RunTetris.playButton);
+		}
 	}
 	
 }

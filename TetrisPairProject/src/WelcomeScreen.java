@@ -2,13 +2,12 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 public class WelcomeScreen {
-	private JButton playButton;
 	private boolean reSized = false;
 	private boolean signal = false;
 	public WelcomeScreen() {
-		playButton = new JButton("Play");
-		playButton.setActionCommand("Play");
-		playButton.addActionListener(new PlayClicker());
+		RunTetris.playButton = new JButton("Play");
+		RunTetris.playButton.setActionCommand("Play");
+		RunTetris.playButton.addActionListener(RunTetris.clicker);
 	}
 	
 	public void display(Graphics g, JFrame screen, GamePanel gamePanel) {
@@ -19,9 +18,9 @@ public class WelcomeScreen {
 		int imgSize = RunTetris.getSizePerc(0.25);
 		g.drawImage(new ImageIcon("Imgs/tetris-logo.png").getImage(), RunTetris.getWidthPerc(0.35), RunTetris.getHeightPerc(0.2), 
 				imgSize+RunTetris.getSizePerc(0.0595), imgSize, gamePanel);
-		playButton.setBounds(RunTetris.getWidthPerc(0.35), RunTetris.getHeightPerc(0.5), RunTetris.getSizePerc(0.25), 
+		RunTetris.playButton.setBounds(RunTetris.getWidthPerc(0.35), RunTetris.getHeightPerc(0.5), RunTetris.getSizePerc(0.25), 
 				RunTetris.getSizePerc(0.08));
-		gamePanel.add(playButton);
+		gamePanel.add(RunTetris.playButton);
 		if (!reSized) {
 			RunTetris.screen.setSize(RunTetris.DEFAULT_WIDTH, RunTetris.DEFAULT_HEIGHT);
 			reSized = true;
@@ -32,19 +31,8 @@ public class WelcomeScreen {
 		return signal;
 	}
 	
-	public void resetSignal() {
-		signal = false;
-	}
-	
-	private class PlayClicker implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			String actionCommand = e.getActionCommand();
-			if (actionCommand.equals("Play")) {
-				signal = true;
-				RunTetris.gamePanel.remove(playButton);
-			}
-		}
-		
+	public void setSignal(boolean b) {
+		signal = b;
 	}
 	
 }
