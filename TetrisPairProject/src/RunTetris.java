@@ -17,8 +17,14 @@ public class RunTetris {
 	public static gameState state;
 	
 	public static JButton playButton;
+	public static JButton retryButton;
+	public static JButton exitButton;
 	
 	private static int score;
+	
+	public static boolean playTrigger = false;
+	public static boolean retryTrigger = false;
+	public static boolean exitTrigger = false;
 	
 	public enum gameState {
 		welcomeScreen,
@@ -40,6 +46,16 @@ public class RunTetris {
 		gamePanel = new GamePanel(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 		gamePanel.addMouseListener(clicker);
 		
+		playButton = new JButton("Play");
+		playButton.setActionCommand("Play");
+		playButton.addActionListener(clicker);
+		retryButton = new JButton("Retry?");
+		retryButton.setActionCommand("Retry?");
+		retryButton.addActionListener(clicker);
+		exitButton = new JButton("Exit");
+		exitButton.setActionCommand("Exit");
+		exitButton.addActionListener(clicker);
+		
 		// For initiating actions
 		addRotateAction("UP");
 		
@@ -59,6 +75,8 @@ public class RunTetris {
 	
 	public void runPlaying() {
 		state = gameState.playing;
+		
+		grid.initializeGrid();
 		
 		addShiftAction("DOWN");
 		addShiftAction("RIGHT");
@@ -83,14 +101,21 @@ public class RunTetris {
 	ActionListener refresher = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			if (state == gameState.welcomeScreen) {
-				if (welcomeScreen.checkSignal()) {
-					welcomeScreen.setSignal(false);
+				if (playTrigger) {
+					playTrigger = false;
 					runPlaying();
 				}
 			} else if (state == gameState.playing) {
 				
 			} else if (state == gameState.gameOver) {
-				
+				if (retryTrigger) {
+					retryTrigger = false;
+					runPlaying();
+				}
+			}
+			if (exitTrigger) {
+				exitTrigger = false;
+				playTetris();
 			}
 			gamePanel.repaint();
 		}

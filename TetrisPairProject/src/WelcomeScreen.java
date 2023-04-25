@@ -3,11 +3,8 @@ import javax.swing.*;
 import java.awt.event.*;
 public class WelcomeScreen {
 	private boolean reSized = false;
-	private boolean signal = false;
 	public WelcomeScreen() {
-		RunTetris.playButton = new JButton("Play");
-		RunTetris.playButton.setActionCommand("Play");
-		RunTetris.playButton.addActionListener(RunTetris.clicker);
+		
 	}
 	
 	public void display(Graphics g, JFrame screen, GamePanel gamePanel) {
@@ -25,14 +22,6 @@ public class WelcomeScreen {
 			RunTetris.screen.setSize(RunTetris.DEFAULT_WIDTH, RunTetris.DEFAULT_HEIGHT);
 			reSized = true;
 		}
-	}
-	
-	public boolean checkSignal() {
-		return signal;
-	}
-	
-	public void setSignal(boolean b) {
-		signal = b;
 	}
 	
 }
