@@ -75,11 +75,11 @@ public class Grid {
 				boolean canPlace = true;
 				for(Block block: tempTetr.getBlocks()) {
 					boolean place=(block.getY()<20&&block.getY()>-1&&block.getX()<10&&block.getX()>-1);
-					System.out.println("place: "+place);
+					//System.out.println("place: "+place);
 					if(place)
 						place&=grid[block.getY()][block.getX()].isEmpty();
 					canPlace&=place;
-					System.out.println("Can Place: "+canPlace);
+					//System.out.println("Can Place: "+canPlace);
 				}
 				//System.out.println(canPlace);
 				if (canPlace) {
@@ -170,11 +170,9 @@ public class Grid {
 				int shift = 0;
 				while (rows.size()>0) {
 					int bottomRow = rows.get(rows.size()-1);
-					System.out.println(bottomRow);
 					for (int i=bottomRow;i>0;i--)
 						grid[i+shift] = grid[i+shift-1];
 					rows.remove(rows.size()-1);
-					System.out.println(shift);
 					shift++;
 				}
 				clearTimer.stop();
