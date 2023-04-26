@@ -32,11 +32,7 @@ public class Grid {
 			nextTetr.add(Tetromino.getRandomTetromino());
 	}
 	public void dropTetr(Tetromino tetr) {
-		if (!testTetrPlacement(tetr, 0, 0)) {
-			RunTetris.endGameTrigger = true;
-		} else {
-			currTetr = tetr;
-		}
+		currTetr = tetr;
 	}
 	public void fallTetr() {
 		boolean stop = false;
@@ -130,9 +126,13 @@ public class Grid {
 		if (clearRows.size()>0) {
 			clearRows(clearRows);
 		}else {
-			dropTetr(nextTetr.get(0));
-			nextTetr.remove(0);
-			nextTetr.add(Tetromino.getRandomTetromino());
+			if (!testTetrPlacement(nextTetr.get(0), 0, 0)) {
+				RunTetris.endGameTrigger = true;
+			} else {
+				dropTetr(nextTetr.remove(0));
+				nextTetr.add(Tetromino.getRandomTetromino());
+			}
+			
 		}
 		holding = false;
 	}
