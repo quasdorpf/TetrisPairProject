@@ -53,59 +53,59 @@ public class ITetromino extends Tetromino {
 		if (currRotation==0&&dir==1) {
 			if (testCase==0)
 				test.setBlockPosition(0,0);
+				else if (testCase==1)test.setBlockPosition(0,-2);
+				else if (testCase==2)test.setBlockPosition(0,1);
+				else if (testCase==3)test.setBlockPosition(1,-2);
+				else if (testCase==4)test.setBlockPosition(-2,1);
+		}else if(currRotation==1&&dir==-1) {
+			if (testCase==0)
+				test.setBlockPosition(0,0);
 				else if (testCase==1)test.setBlockPosition(0,2);
 				else if (testCase==2)test.setBlockPosition(0,-1);
 				else if (testCase==3)test.setBlockPosition(-1,2);
 				else if (testCase==4)test.setBlockPosition(2,-1);
-		}else if(currRotation==1&&dir==-1) {
+		}else if(currRotation==1&&dir==1) {
+			if (testCase==0)
+				test.setBlockPosition(0,0);
+				else if (testCase==1)test.setBlockPosition(0,-1);
+				else if (testCase==2)test.setBlockPosition(0,2);
+				else if (testCase==3)test.setBlockPosition(-2,-1);
+				else if (testCase==4)test.setBlockPosition(1,2);
+		}else if(currRotation==2&&dir==-1) {
+			if (testCase==0)
+				test.setBlockPosition(0,0);
+				else if (testCase==1)test.setBlockPosition(0,1);
+				else if (testCase==2)test.setBlockPosition(0,-2);
+				else if (testCase==3)test.setBlockPosition(2,1);
+				else if (testCase==4)test.setBlockPosition(-1,-2);
+		}else if(currRotation==2&&dir==1) {
+			if (testCase==0)
+				test.setBlockPosition(0,0);
+				else if (testCase==1)test.setBlockPosition(0,2);
+				else if (testCase==2)test.setBlockPosition(0,-1);
+				else if (testCase==3)test.setBlockPosition(-1,2);
+				else if (testCase==4)test.setBlockPosition(2,-1);
+		}else if(currRotation==3&&dir==-1) {
 			if (testCase==0)
 				test.setBlockPosition(0,0);
 				else if (testCase==1)test.setBlockPosition(0,-2);
 				else if (testCase==2)test.setBlockPosition(0,1);
 				else if (testCase==3)test.setBlockPosition(1,-2);
 				else if (testCase==4)test.setBlockPosition(-2,1);
-		}else if(currRotation==1&&dir==1) {
-			if (testCase==0)
-				test.setBlockPosition(0,0);
-				else if (testCase==1)test.setBlockPosition(0,1);
-				else if (testCase==2)test.setBlockPosition(0,-2);
-				else if (testCase==3)test.setBlockPosition(2,1);
-				else if (testCase==4)test.setBlockPosition(-1,-2);
-		}else if(currRotation==2&&dir==-1) {
-			if (testCase==0)
-				test.setBlockPosition(0,0);
-				else if (testCase==1)test.setBlockPosition(0,1);
-				else if (testCase==2)test.setBlockPosition(0,2);
-				else if (testCase==3)test.setBlockPosition(-2,-1);
-				else if (testCase==4)test.setBlockPosition(1,2);
-		}else if(currRotation==2&&dir==1) {
-			if (testCase==0)
-				test.setBlockPosition(0,0);
-				else if (testCase==1)test.setBlockPosition(0,-2);
-				else if (testCase==2)test.setBlockPosition(0,1);
-				else if (testCase==3)test.setBlockPosition(1,-2);
-				else if (testCase==4)test.setBlockPosition(2,-1);
-		}else if(currRotation==3&&dir==-1) {
-			if (testCase==0)
-				test.setBlockPosition(0,0);
-				else if (testCase==1)test.setBlockPosition(0,2);
-				else if (testCase==2)test.setBlockPosition(0,-1);
-				else if (testCase==3)test.setBlockPosition(-1,2);
-				else if (testCase==4)test.setBlockPosition(2,-1);
 		}else if(currRotation==3&&dir==1) {
 			if (testCase==0)
 				test.setBlockPosition(0,0);
 				else if (testCase==1)test.setBlockPosition(0,1);
-				else if (testCase==2)test.setBlockPosition(0,2);
-				else if (testCase==3)test.setBlockPosition(-2,-1);
-				else if (testCase==4)test.setBlockPosition(1,2);
+				else if (testCase==2)test.setBlockPosition(0,-2);
+				else if (testCase==3)test.setBlockPosition(2,1);
+				else if (testCase==4)test.setBlockPosition(-1,-2);
 		}else if(currRotation==0&&dir==-1) {
 			if (testCase==0)
 				test.setBlockPosition(0,0);
 				else if (testCase==1)test.setBlockPosition(0,-1);
-				else if (testCase==2)test.setBlockPosition(0,-2);
-				else if (testCase==3)test.setBlockPosition(2,1);
-				else if (testCase==4)test.setBlockPosition(-1,-2);
+				else if (testCase==2)test.setBlockPosition(0,2);
+				else if (testCase==3)test.setBlockPosition(-2,-1);
+				else if (testCase==4)test.setBlockPosition(1,2);
 		}
 		return test;
 	}
