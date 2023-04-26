@@ -15,6 +15,9 @@ public class Grid {
 	private boolean holding;
 	
 	Grid(){
+		initializeGrid();
+	}
+	public void initializeGrid() {
 		grid = new Block[20][10];
 		holding = true;
 		nextTetr = new ArrayList<Tetromino>();

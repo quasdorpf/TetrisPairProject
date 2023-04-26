@@ -19,8 +19,7 @@ public class GamePanel extends JPanel {
 	public static int blockSize;
 	private Block[][] visGrid;
 	
-	private JButton retryButton;
-	private JButton exitButton;
+	
 	
 	public GamePanel(int width, int height) {
 		setPreferredSize(new Dimension(width, height));
@@ -126,6 +125,10 @@ public class GamePanel extends JPanel {
 		g.setFont(new Font("Serif", Font.PLAIN, RunTetris.getSizePerc(specNumInPerc(20))));
 		g.drawString("Game Over", x+RunTetris.getSizePerc(BLOCK_SIZE_PERC*3), y+RunTetris.getSizePerc(BLOCK_SIZE_PERC*1.5));
 		g.drawString("Your score: " + RunTetris.getScore(), x+RunTetris.getSizePerc(BLOCK_SIZE_PERC*1.5), y+RunTetris.getSizePerc(BLOCK_SIZE_PERC*3));
+		RunTetris.retryButton.setBounds(x, y, 100, 100);
+		this.add(RunTetris.retryButton);
+		RunTetris.exitButton.setBounds(x+200, y, 100, 100);
+		this.add(RunTetris.exitButton);
 	}
 	
 	private void drawGrid(Graphics g, int x, int y, int blockSize) {
