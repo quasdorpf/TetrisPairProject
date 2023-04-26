@@ -104,7 +104,6 @@ public class GamePanel extends JPanel {
 		for (digits=0; scoreRem>0; digits++) {
 			scoreRem /= 10;
 		}
-		System.out.println(digits);
 		g.drawString(String.valueOf(RunTetris.getScore()), x+(int)((double)width/2.2)-(RunTetris.getWidthPerc((digits-1)*0.01)), 
 				y+RunTetris.getHeightPerc(0.09));
 	}

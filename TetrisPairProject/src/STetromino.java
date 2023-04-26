@@ -59,8 +59,6 @@ public class STetromino extends Tetromino {
 		rotation[3][1] = new Block(color,new int[] {1,0});
 		rotation[3][2] = new Block(color,new int[] {1,1});
 		rotation[3][3] = new Block(color,new int[] {2,1});
-
-		setRotations(rotations);
 		setRotation(rotation);
 	}
 	public Tetromino getNewTetromino() {

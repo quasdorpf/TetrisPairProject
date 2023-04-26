@@ -20,7 +20,6 @@ public class OTetromino extends Tetromino {
 				}
 			}
 		}
-		setRotations(rotations);
 		setRotation(rotation);
 	}
 	public Tetromino getNewTetromino() {
