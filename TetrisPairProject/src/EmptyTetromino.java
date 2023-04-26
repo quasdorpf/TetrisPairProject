@@ -17,5 +17,9 @@ public class EmptyTetromino extends Tetromino {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	public boolean isEmpty() {
+		return true;
+	}
 
 }

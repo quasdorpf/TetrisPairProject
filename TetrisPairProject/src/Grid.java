@@ -19,8 +19,9 @@ public class Grid {
 	}
 	public void initializeGrid() {
 		grid = new Block[20][10];
-		holding = true;
+		holding = false;
 		nextTetr = new ArrayList<Tetromino>();
+		heldTetr = new EmptyTetromino();
 		for(int i=0;i<grid.length;i++){
 			for(int j=0;j<grid[0].length;j++){
 				grid[i][j] = new Block();
@@ -92,7 +93,7 @@ public class Grid {
 	}
 	public void holdTetr() {
 		if (!holding) {
-		if (heldTetr == null) {
+		if (heldTetr.isEmpty()) {
 			heldTetr = currTetr.getNewTetromino();
 			dropTetr(nextTetr.get(0));
 			nextTetr.remove(0);

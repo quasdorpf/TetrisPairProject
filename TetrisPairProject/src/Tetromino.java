@@ -150,4 +150,7 @@ public abstract class Tetromino {
 			b.draw(g, blockX, blockY, blockSize);
 		}
 	}
+	public boolean isEmpty() {
+		return false;
+	}
 }
