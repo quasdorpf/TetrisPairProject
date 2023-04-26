@@ -33,7 +33,7 @@ public class Grid {
 	}
 	public void dropTetr(Tetromino tetr) {
 		if (!testTetrPlacement(tetr, 0, 0)) {
-			RunTetris.endGame();
+			RunTetris.endGameTrigger = true;
 		} else {
 			currTetr = tetr;
 		}

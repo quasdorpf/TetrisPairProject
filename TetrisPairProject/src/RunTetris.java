@@ -23,6 +23,7 @@ public class RunTetris {
 	private static int score;
 	
 	public static boolean playTrigger = false;
+	public static boolean endGameTrigger = false;
 	public static boolean retryTrigger = false;
 	public static boolean exitTrigger = false;
 	
@@ -56,20 +57,20 @@ public class RunTetris {
 		exitButton.setActionCommand("Exit");
 		exitButton.addActionListener(clicker);
 		
-		// For initiating actions
-		addRotateAction("UP");
+		
 		
 	}
 	
 	public void playTetris() { // essentially a runWelcomeScreen
 		state = gameState.welcomeScreen;
-		score = 0;
 		
 		screen.setContentPane(gamePanel);
 		screen.pack();
 		screen.setVisible(true);
 		refreshTimer.start();
 		
+		// For initiating actions
+		addRotateAction("UP");
 		
 	}
 	
@@ -77,6 +78,7 @@ public class RunTetris {
 		state = gameState.playing;
 		
 		grid.initializeGrid();
+		score = 0;
 		
 		addShiftAction("DOWN");
 		addShiftAction("RIGHT");
@@ -87,7 +89,7 @@ public class RunTetris {
 		dropTimer.start();
 	}
 	
-	public static void endGame() {
+	public void endGame() {
 		removeAction("DOWN");
 		removeAction("RIGHT");
 		removeAction("LEFT");
@@ -106,10 +108,14 @@ public class RunTetris {
 					runPlaying();
 				}
 			} else if (state == gameState.playing) {
-				
+				if (endGameTrigger) {
+					endGameTrigger = false;
+					endGame();
+				}
 			} else if (state == gameState.gameOver) {
 				if (retryTrigger) {
 					retryTrigger = false;
+					addRotateAction("UP");
 					runPlaying();
 				}
 			}
