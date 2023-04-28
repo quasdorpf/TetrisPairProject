@@ -7,11 +7,10 @@ public class Grid {
 	private Tetromino currTetr;
 	private Tetromino heldTetr;
 	private ArrayList<Tetromino> nextTetr;
-	private Block[][] visibleGrid;
 	private Block[][] grid;
 	Timer clearTimer;
 	Timer dropTimer;
-	private int score;
+	private boolean setting;
 	private boolean holding;
 	
 	Grid(){
@@ -27,7 +26,6 @@ public class Grid {
 				grid[i][j] = new Block();
 			}
 		}
-		visibleGrid = grid.clone();
 		dropTetr(Tetromino.getRandomTetromino());
 		for (int i=0;i<4;i++)
 			nextTetr.add(Tetromino.getRandomTetromino());
@@ -36,6 +34,7 @@ public class Grid {
 		currTetr = tetr;
 	}
 	public void fallTetr() {
+		setting=true;
 		boolean stop = false;
 		for(Block block: currTetr.getBlocks()) {
 			boolean pause=(block.getY()+1==20);
@@ -45,8 +44,10 @@ public class Grid {
 		}
 		if (!stop)
 			currTetr.shift('D');
-		else
+		else {
+			setting=false;
 			setTetr();
+		}
 	}
 	public void shiftTetr(char dir) {
 		boolean stop = false;
@@ -121,19 +122,20 @@ public class Grid {
 			//System.out.println("------ONE------");
 			if(canClear&&!clearRows.contains(block.getY())) {
 				clearRows.add(block.getY());
+				while(clearRows.indexOf(block.getY())>0&&block.getY()<clearRows.get(clearRows.indexOf(block.getY())-1)) {
+				System.out.println(clearRows.get(clearRows.indexOf(block.getY()))+",  "+clearRows.get(clearRows.indexOf(block.getY())-1));
+				clearRows.add(clearRows.remove(clearRows.indexOf(block.getY())-1));
+				}
 			}
 		}
 		//System.out.println("-----NEXT------");
 		if (clearRows.size()>0) {
 			clearRows(clearRows);
-		}else {
-			if (!testTetrPlacement(nextTetr.get(0), 0, 0)) {
-				RunTetris.endGameTrigger = true;
-			} else {
-				dropTetr(nextTetr.remove(0));
-				nextTetr.add(Tetromino.getRandomTetromino());
-				
-			}
+		}else if (!testTetrPlacement(nextTetr.get(0), 0, 0)) {
+			RunTetris.endGameTrigger = true;
+		} else {
+			dropTetr(nextTetr.remove(0));
+			nextTetr.add(Tetromino.getRandomTetromino());
 			
 		}
 			holding = false;
@@ -157,13 +159,13 @@ public class Grid {
 		if(dropTimer!=null)
 			dropTimer.stop();
 		if (rows.size() == 1) {
-			RunTetris.incScore(40);
-		} else if (rows.size() == 2) {
 			RunTetris.incScore(100);
-		} else if (rows.size() == 3) {
+		} else if (rows.size() == 2) {
 			RunTetris.incScore(300);
+		} else if (rows.size() == 3) {
+			RunTetris.incScore(500);
 		} else if (rows.size() == 4) {
-			RunTetris.incScore(1200);
+			RunTetris.incScore(800);
 		}
 		currTetr = new EmptyTetromino();
 		for (int row:rows)
@@ -173,6 +175,10 @@ public class Grid {
 		ActionListener action = new ActionListener() {
 			int shift = 0;
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(shift);
+				for(int i:rows)
+					System.out.print(i+", ");
+				System.out.println("---------------------");
 				if (rows.size()>0) {
 					int bottomRow = rows.get(rows.size()-1);
 					for (int i=bottomRow;i>0;i--) {
@@ -184,10 +190,10 @@ public class Grid {
 					rows.remove(rows.size()-1);
 					shift++;
 				}else {
-				clearTimer.stop();
 				dropTetr(nextTetr.get(0));
 				nextTetr.remove(0);
 				nextTetr.add(Tetromino.getRandomTetromino());
+				clearTimer.stop();
 				}
 				if(dropTimer!=null)
 					dropTimer.start();
@@ -203,6 +209,9 @@ public class Grid {
 	}
 	public Block[][] getGrid(){
 		return grid.clone();
+	}
+	public boolean isFalling() {
+		return setting;
 	}
 	public Tetromino getNextTetr(int index) {
 		if (index < 0 || index >= nextTetr.size()) {

@@ -8,9 +8,8 @@ public class HardDropAction extends AbstractAction {
 		this.grid = grid;
 	}
 	public void actionPerformed(ActionEvent e) {
-		Tetromino tetr = grid.getNextTetr(0);
-		while (tetr==grid.getNextTetr(0))
-			grid.fallTetr();
+		while (grid.isFalling()) {
+			grid.fallTetr();}
 	}
 
 }
