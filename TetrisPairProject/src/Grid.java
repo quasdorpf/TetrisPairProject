@@ -171,9 +171,9 @@ public class Grid {
 				grid[row][j] = new Block();
 			}
 		ActionListener action = new ActionListener() {
+			int shift = 0;
 			public void actionPerformed(ActionEvent e) {
-				int shift = 0;
-				while (rows.size()>0) {
+				if (rows.size()>0) {
 					int bottomRow = rows.get(rows.size()-1);
 					for (int i=bottomRow;i>0;i--) {
 						grid[i+shift] = grid[i+shift-1];
@@ -183,32 +183,23 @@ public class Grid {
 					}
 					rows.remove(rows.size()-1);
 					shift++;
-				}
+				}else {
 				clearTimer.stop();
-				if(dropTimer!=null)
-					dropTimer.start();
 				dropTetr(nextTetr.get(0));
 				nextTetr.remove(0);
 				nextTetr.add(Tetromino.getRandomTetromino());
-				for (Block[] row:grid)
-					System.out.println(row);
-				System.out.println("\n\n\n\n\n");
+				}
+				if(dropTimer!=null)
+					dropTimer.start();
+//				for (Block[] row:grid)
+//					System.out.println(row);
+//				System.out.println("\n\n\n\n\n");
 			}
 		};
-		clearTimer = new Timer(50,action);
+		clearTimer = new Timer(5,action);
 		clearTimer.setRepeats(true);
 		clearTimer.start();
 		return rows;
-	}
-	private void fallRows(ArrayList<Integer> rows) {
-		while (rows.size()>0) {
-			int bottomRow = -1;
-			for(int row:rows)
-				if (row>bottomRow)
-					bottomRow = row;
-			for (int i=1;i<bottomRow;i++)
-				grid[bottomRow] = grid[bottomRow-1];
-		}
 	}
 	public Block[][] getGrid(){
 		return grid.clone();
