@@ -132,10 +132,11 @@ public class Grid {
 			} else {
 				dropTetr(nextTetr.remove(0));
 				nextTetr.add(Tetromino.getRandomTetromino());
+				
 			}
 			
 		}
-		holding = false;
+			holding = false;
 	}
 	public Block[][] makeVisible() {
 		Block[][] visibleGrid = new Block[20][10];
@@ -174,8 +175,12 @@ public class Grid {
 				int shift = 0;
 				while (rows.size()>0) {
 					int bottomRow = rows.get(rows.size()-1);
-					for (int i=bottomRow;i>0;i--)
+					for (int i=bottomRow;i>0;i--) {
 						grid[i+shift] = grid[i+shift-1];
+					grid[shift]= new Block[10];
+					for (int j=0;j<10;j++)
+						grid[shift][j]= new Block();
+					}
 					rows.remove(rows.size()-1);
 					shift++;
 				}
@@ -185,6 +190,9 @@ public class Grid {
 				dropTetr(nextTetr.get(0));
 				nextTetr.remove(0);
 				nextTetr.add(Tetromino.getRandomTetromino());
+				for (Block[] row:grid)
+					System.out.println(row);
+				System.out.println("\n\n\n\n\n");
 			}
 		};
 		clearTimer = new Timer(50,action);
