@@ -8,7 +8,9 @@ public class HoldAction extends AbstractAction {
 		this.grid = grid;
 	}
 	public void actionPerformed(ActionEvent e) {
-		grid.holdTetr();
+		if (RunTetris.state == RunTetris.gameState.playing) {
+			grid.holdTetr();
+		}
 	}
 
 }

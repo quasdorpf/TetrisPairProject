@@ -20,6 +20,9 @@ public class RunTetris {
 	public static JButton retryButton;
 	public static JButton exitButton;
 	
+	public static InputMap inputMap;
+	private static ActionMap actionMap;
+	
 	private static int score;
 	
 	public static boolean playTrigger = false;
@@ -57,20 +60,29 @@ public class RunTetris {
 		exitButton.setActionCommand("Exit");
 		exitButton.addActionListener(clicker);
 		
+		// For initiating actions
+		inputMap = gamePanel.getInputMap();
+		actionMap = gamePanel.getActionMap();
+		addShiftAction("DOWN");
+		addShiftAction("RIGHT");
+		addShiftAction("LEFT");
+		addRotateAction("UP");
+		addHoldAction("C");
 		
-		
-	}
-	
-	public void playTetris() { // essentially a runWelcomeScreen
-		state = gameState.welcomeScreen;
 		
 		screen.setContentPane(gamePanel);
 		screen.pack();
 		screen.setVisible(true);
 		refreshTimer.start();
 		
-		// For initiating actions
-		addRotateAction("UP");
+	}
+	
+	public void playTetris() { // essentially a runWelcomeScreen
+		state = gameState.welcomeScreen;
+		
+		
+		
+		
 		
 	}
 	
@@ -80,21 +92,19 @@ public class RunTetris {
 		grid.initializeGrid();
 		score = 0;
 		
-		addShiftAction("DOWN");
-		addShiftAction("RIGHT");
-		addShiftAction("LEFT");
-		addRotateAction("UP");
-		addHoldAction("C");
+		
 		
 		dropTimer.start();
 	}
 	
 	public void endGame() {
+		/*
 		removeAction("DOWN");
 		removeAction("RIGHT");
 		removeAction("LEFT");
 		removeAction("UP");
 		removeAction("C");
+		*/
 		
 		state = gameState.gameOver;
 		dropTimer.stop();
@@ -115,7 +125,6 @@ public class RunTetris {
 			} else if (state == gameState.gameOver) {
 				if (retryTrigger) {
 					retryTrigger = false;
-					addRotateAction("UP");
 					runPlaying();
 				}
 			}
@@ -150,27 +159,28 @@ public class RunTetris {
 	private static void addShiftAction(String name){
 		Action newAction = new ShiftAction(name, grid);
 		KeyStroke key = KeyStroke.getKeyStroke(name);
-		gamePanel.getInputMap().put(key, name);
-		gamePanel.getActionMap().put(name, newAction);
+		inputMap.put(key, name);
+		actionMap.put(name, newAction);
 	}
 	
 	private static void addRotateAction(String name) {
 		Action newAction = new RotateAction(grid, 1);
 		KeyStroke key = KeyStroke.getKeyStroke(name);
-		gamePanel.getInputMap().put(key, name);
-		gamePanel.getActionMap().put(name, newAction);
+		inputMap.put(key, name);
+		actionMap.put(name, newAction);
 	}
 	
 	private static void addHoldAction(String name) {
 		Action newAction = new HoldAction(grid);
 		KeyStroke key = KeyStroke.getKeyStroke(name);
-		gamePanel.getInputMap().put(key, name);
-		gamePanel.getActionMap().put(name, newAction);
+		inputMap.put(key, name);
+		actionMap.put(name, newAction);
 	}
 	
 	private static void removeAction(String name) {
 		KeyStroke key = KeyStroke.getKeyStroke(name);
-		gamePanel.getInputMap().remove(key);
+		inputMap.remove(key);
+		actionMap.remove(key);
 	}
 	
 	public static int getScore() {
