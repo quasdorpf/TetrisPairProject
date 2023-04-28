@@ -66,6 +66,7 @@ public class RunTetris {
 		addShiftAction("DOWN");
 		addShiftAction("RIGHT");
 		addShiftAction("LEFT");
+		addHardDropAction("SPACE");
 		addRotateAction("UP");
 		addHoldAction("C");
 		
@@ -96,13 +97,12 @@ public class RunTetris {
 	}
 	
 	public void endGame() {
-		/*
 		removeAction("DOWN");
 		removeAction("RIGHT");
 		removeAction("LEFT");
+		removeAction("SPACE");
 		removeAction("UP");
 		removeAction("C");
-		*/
 		
 		state = gameState.gameOver;
 		dropTimer.stop();
@@ -156,6 +156,12 @@ public class RunTetris {
 	
 	private static void addShiftAction(String name){
 		Action newAction = new ShiftAction(name, grid);
+		KeyStroke key = KeyStroke.getKeyStroke(name);
+		inputMap.put(key, name);
+		actionMap.put(name, newAction);
+	}
+	private static void addHardDropAction(String name){
+		Action newAction = new HardDropAction(grid);
 		KeyStroke key = KeyStroke.getKeyStroke(name);
 		inputMap.put(key, name);
 		actionMap.put(name, newAction);
