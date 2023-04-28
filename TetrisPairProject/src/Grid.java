@@ -12,7 +12,6 @@ public class Grid {
 	Timer dropTimer;
 	private boolean setting;
 	private boolean holding;
-	
 	Grid(){
 		initializeGrid();
 	}
@@ -76,13 +75,10 @@ public class Grid {
 				boolean canPlace = true;
 				for(Block block: tempTetr.getBlocks()) {
 					boolean place=(block.getY()<20&&block.getY()>-1&&block.getX()<10&&block.getX()>-1);
-					//System.out.println("place: "+place);
 					if(place)
 						place&=grid[block.getY()][block.getX()].isEmpty();
 					canPlace&=place;
-					//System.out.println("Can Place: "+canPlace);
-				}
-				//System.out.println(canPlace);
+				}
 				if (canPlace) {
 					rotationWorks = true;
 					tetr = tempTetr;
@@ -114,21 +110,15 @@ public class Grid {
 			grid[block.getY()][block.getX()] = block;
 			for (int j=0;j<10;j++) {
 				canClear&=!grid[block.getY()][j].isEmpty();
-				//System.out.println(!grid[block.getY()][j].isEmpty());
 			}
-			//System.out.println("-----BOTH------");
-			//System.out.println(canClear);
-			//System.out.println(!clearRows.contains(block.getY()));
-			//System.out.println("------ONE------");
 			if(canClear&&!clearRows.contains(block.getY())) {
 				clearRows.add(block.getY());
-				while(clearRows.indexOf(block.getY())>0&&block.getY()<clearRows.get(clearRows.indexOf(block.getY())-1)) {
-				System.out.println(clearRows.get(clearRows.indexOf(block.getY()))+",  "+clearRows.get(clearRows.indexOf(block.getY())-1));
+				while(clearRows.indexOf(block.getY())>0&&
+						block.getY()<clearRows.get(clearRows.indexOf(block.getY())-1)) {
 				clearRows.add(clearRows.remove(clearRows.indexOf(block.getY())-1));
 				}
 			}
 		}
-		//System.out.println("-----NEXT------");
 		if (clearRows.size()>0) {
 			clearRows(clearRows);
 		}else if (!testTetrPlacement(nextTetr.get(0), 0, 0)) {
@@ -175,10 +165,6 @@ public class Grid {
 		ActionListener action = new ActionListener() {
 			int shift = 0;
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(shift);
-				for(int i:rows)
-					System.out.print(i+", ");
-				System.out.println("---------------------");
 				if (rows.size()>0) {
 					int bottomRow = rows.get(rows.size()-1);
 					for (int i=bottomRow;i>0;i--) {
@@ -197,9 +183,6 @@ public class Grid {
 				}
 				if(dropTimer!=null)
 					dropTimer.start();
-//				for (Block[] row:grid)
-//					System.out.println(row);
-//				System.out.println("\n\n\n\n\n");
 			}
 		};
 		clearTimer = new Timer(5,action);

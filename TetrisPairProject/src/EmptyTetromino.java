@@ -14,7 +14,6 @@ public class EmptyTetromino extends Tetromino {
 		setRotation(rotation);
 	}
 	public Tetromino getNewTetromino() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	

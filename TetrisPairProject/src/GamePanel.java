@@ -40,11 +40,6 @@ public class GamePanel extends JPanel {
 	}
 	
 	public void drawWelcomeScreenAndLeaderboard(Graphics g) {
-		/*
-		for (int i=0; i<tetrs.length; i++) {
-			tetrs[i].draw(g, i*100+50, 50, 20);
-		}
-		*/
 		
 		welcomeScreen.display(g, screen, this);
 		
