@@ -53,8 +53,8 @@ public class RunTetris {
 		playButton = new JButton("Play");
 		playButton.setActionCommand("Play");
 		playButton.addActionListener(clicker);
-		retryButton = new JButton("Retry?");
-		retryButton.setActionCommand("Retry?");
+		retryButton = new JButton("Retry");
+		retryButton.setActionCommand("Retry");
 		retryButton.addActionListener(clicker);
 		exitButton = new JButton("Exit");
 		exitButton.setActionCommand("Exit");
@@ -81,14 +81,12 @@ public class RunTetris {
 		state = gameState.welcomeScreen;
 		
 		
-		
-		
-		
 	}
 	
 	public void runPlaying() {
 		state = gameState.playing;
 		
+		gamePanel.requestFocusInWindow();
 		grid.initializeGrid();
 		score = 0;
 		

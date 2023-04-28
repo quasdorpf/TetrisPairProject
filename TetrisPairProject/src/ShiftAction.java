@@ -10,7 +10,6 @@ public class ShiftAction extends AbstractAction {
 		this.grid = grid;
 	}
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("Here");
 		if (RunTetris.state == RunTetris.gameState.playing) {
 			if(name.charAt(0)=='D') {
 				grid.fallTetr();

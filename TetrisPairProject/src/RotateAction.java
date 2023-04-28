@@ -10,7 +10,7 @@ public class RotateAction  extends AbstractAction {
 		this.grid = grid;
 	}
 	public void actionPerformed(ActionEvent e) {
-			if (RunTetris.state == RunTetris.gameState.playing) {
+		if (RunTetris.state == RunTetris.gameState.playing) {
 			grid.rotate(rotation);
 			Block[][] visibleGrid = grid.makeVisible();
 		}

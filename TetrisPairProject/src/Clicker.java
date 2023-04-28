@@ -61,7 +61,7 @@ public class Clicker implements KeyListener, MouseListener, ActionListener {
 		if (actionCommand.equals("Play")) {
 			RunTetris.playTrigger = true;
 			RunTetris.gamePanel.remove(RunTetris.playButton);
-		} else if (actionCommand.equals("Retry?")) {
+		} else if (actionCommand.equals("Retry")) {
 			RunTetris.retryTrigger = true;
 			RunTetris.gamePanel.remove(RunTetris.retryButton);
 			RunTetris.gamePanel.remove(RunTetris.exitButton);
