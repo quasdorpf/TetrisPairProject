@@ -95,13 +95,6 @@ public class RunTetris {
 	}
 	
 	public void endGame() {
-		removeAction("DOWN");
-		removeAction("RIGHT");
-		removeAction("LEFT");
-		removeAction("SPACE");
-		removeAction("UP");
-		removeAction("C");
-		
 		state = gameState.gameOver;
 		dropTimer.stop();
 	}
@@ -177,12 +170,6 @@ public class RunTetris {
 		KeyStroke key = KeyStroke.getKeyStroke(name);
 		inputMap.put(key, name);
 		actionMap.put(name, newAction);
-	}
-	
-	private static void removeAction(String name) {
-		KeyStroke key = KeyStroke.getKeyStroke(name);
-		inputMap.remove(key);
-		actionMap.remove(key);
 	}
 	
 	public static int getScore() {

@@ -29,6 +29,8 @@ public class GamePanel extends JPanel {
 		super.paintComponent(g);
 		blockSize = RunTetris.getSizePerc(BLOCK_SIZE_PERC);
 		visGrid = RunTetris.grid.makeVisible();
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, RunTetris.screen.getWidth(), RunTetris.screen.getHeight());
 		if (RunTetris.state == RunTetris.gameState.welcomeScreen) {
 			drawWelcomeScreenAndLeaderboard(g);
 		} else if (RunTetris.state == RunTetris.gameState.playing) {
@@ -82,7 +84,7 @@ public class GamePanel extends JPanel {
 		g.drawString("Hold", x+(int)((double)width/3.5), y+RunTetris.getHeightPerc(0.04));
 		Tetromino heldTetr = RunTetris.grid.getHeldTetr();
 		if (heldTetr != null) {
-			heldTetr.draw(g, x+(int)((double)width/6), y+RunTetris.getHeightPerc(0.06), blockSize);
+			heldTetr.draw(g, x+(int)((double)width/6), y+RunTetris.getHeightPerc(0.07), blockSize);
 		}
 		
 		// Score
@@ -99,7 +101,7 @@ public class GamePanel extends JPanel {
 		for (digits=0; scoreRem>0; digits++) {
 			scoreRem /= 10;
 		}
-		g.drawString(String.valueOf(RunTetris.getScore()), x+(int)((double)width/2.2)-(RunTetris.getWidthPerc((digits-1)*0.01)), 
+		g.drawString(String.valueOf(RunTetris.getScore()), x+(int)((double)width/2.4)-(RunTetris.getWidthPerc((digits-1)*0.005)), 
 				y+RunTetris.getHeightPerc(0.09));
 	}
 	
@@ -117,11 +119,11 @@ public class GamePanel extends JPanel {
 		g.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
 		g.setColor(Color.BLACK);
 		g.setFont(new Font("Serif", Font.PLAIN, RunTetris.getSizePerc(specNumInPerc(20))));
-		g.drawString("Game Over", x+RunTetris.getSizePerc(BLOCK_SIZE_PERC*3), y+RunTetris.getSizePerc(BLOCK_SIZE_PERC*1.5));
-		g.drawString("Your score: " + RunTetris.getScore(), x+RunTetris.getSizePerc(BLOCK_SIZE_PERC*1.5), y+RunTetris.getSizePerc(BLOCK_SIZE_PERC*3));
-		RunTetris.retryButton.setBounds(x, y, 100, 100);
+		g.drawString("Game Over", x+(int)((double)blockSize*2.5), y+(int)((double)blockSize*1.5));
+		g.drawString("Your score: " + RunTetris.getScore(), x+(int)((double)blockSize*2.5), y+(blockSize*3));
+		RunTetris.retryButton.setBounds(x+(int)((double)blockSize*1.5), y+(blockSize*4), blockSize*3, (int)((double)blockSize*1.75));
 		this.add(RunTetris.retryButton);
-		RunTetris.exitButton.setBounds(x+200, y, 100, 100);
+		RunTetris.exitButton.setBounds(x+(int)((double)blockSize*5.5), y+(blockSize*4), blockSize*3, (int)((double)blockSize*1.75));
 		this.add(RunTetris.exitButton);
 	}
 	
