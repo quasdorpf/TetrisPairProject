@@ -8,7 +8,7 @@ public class Grid {
 	private Tetromino heldTetr;
 	private ArrayList<Tetromino> nextTetr;
 	private Block[][] grid;
-	Timer clearTimer;
+	Timerx clearTimer;
 	Timer dropTimer;
 	private boolean setting;
 	private boolean holding;
@@ -158,9 +158,9 @@ public class Grid {
 			RunTetris.incScore(1600);
 		}
 		currTetr = new EmptyTetromino();
-		ActionListener action = new ActionListener() {
+		TimerTask task = new TimerTask() {
 			int fromCenter = 0;
-			public void actionPerformed(ActionEvent e) {
+			public void run() {
 				if(fromCenter<5){
 					for (int row:rows) {
 						grid[row][4-fromCenter] = new Block();
@@ -168,10 +168,9 @@ public class Grid {
 					}
 					fromCenter++;
 				}else{
-					clearTimer.stop();
-					ActionListener newAction = new ActionListener() {
+					TimerTask task = new TimerTask(){
 						int shift = 0;
-						public void actionPerformed(ActionEvent e) {
+						public void run() {
 							if (rows.size()>0) {
 								int bottomRow = rows.get(rows.size()-1);
 								for (int i=bottomRow;i>0;i--) {
@@ -186,15 +185,15 @@ public class Grid {
 							dropTetr(nextTetr.get(0));
 							nextTetr.remove(0);
 							nextTetr.add(Tetromino.getRandomTetromino());
-							clearTimer.stop();
+							clearTimer.cancel();
 							}
 							if(dropTimer!=null)
 								dropTimer.start();
 						}
 					};
-					clearTimer = new Timer(1,newAction);
-					clearTimer.setRepeats(true);
-					clearTimer.start();
+					clearTimer.cancel();
+					clearTimer = new Timerx();
+					clearTimer.scheduleAtFixedRate(task,10,50);
 				}
 			}
 		};
@@ -221,12 +220,11 @@ public class Grid {
 //					dropTimer.start();
 //			}
 //		};
-		clearTimer = new Timer(1,action);
-		clearTimer.setInitialDelay(1);
-		clearTimer.setRepeats(true);
-		clearTimer.start();
+		clearTimer = new Timerx();
+		clearTimer.scheduleAtFixedRate(task,10,50);
 		return rows;
 	}
+	
 	public Block[][] getGrid(){
 		return grid.clone();
 	}

@@ -87,8 +87,7 @@ public class RunTetris {
 		
 		gamePanel.requestFocusInWindow();
 		grid.initializeGrid();
-		score = 0;
-		
+		score = 0;		
 		
 		
 		dropTimer.start();
@@ -104,6 +103,7 @@ public class RunTetris {
 			if (state == gameState.welcomeScreen) {
 				if (playTrigger) {
 					playTrigger = false;
+					RunTetris.gamePanel.remove(RunTetris.playButton);
 					runPlaying();
 				}
 			} else if (state == gameState.playing) {
@@ -114,11 +114,15 @@ public class RunTetris {
 			} else if (state == gameState.gameOver) {
 				if (retryTrigger) {
 					retryTrigger = false;
+					RunTetris.gamePanel.remove(RunTetris.retryButton);
+					RunTetris.gamePanel.remove(RunTetris.exitButton);
 					runPlaying();
 				}
 			}
 			if (exitTrigger) {
 				exitTrigger = false;
+				RunTetris.gamePanel.remove(RunTetris.retryButton);
+				RunTetris.gamePanel.remove(RunTetris.exitButton);
 				playTetris();
 			}
 			gamePanel.repaint();
