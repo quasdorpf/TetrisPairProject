@@ -5,7 +5,7 @@ public class RunTetris {
 	public static final int DEFAULT_WIDTH = 800;
 	public static final int DEFAULT_HEIGHT = 600;
 	public static final int DEFAULT_SIZE = Math.min(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-	private static final int TIME_BETWEEN_ANIMATIONS = 10;
+	private static final int TIME_BETWEEN_ANIMATIONS = 30;
 	private static final int TIME_BETWEEN_DROPS = 1000;
 	
 	public static JFrame screen;
@@ -16,19 +16,17 @@ public class RunTetris {
 	public static Grid grid;
 	public static gameState state;
 	
-	public static JButton playButton;
-	public static JButton retryButton;
-	public static JButton exitButton;
+	public static JButton playButton, retryButton, exitButton;
 	
 	public static InputMap inputMap;
 	private static ActionMap actionMap;
 	
 	private static int score;
 	
-	public static boolean playTrigger = false;
-	public static boolean endGameTrigger = false;
-	public static boolean retryTrigger = false;
-	public static boolean exitTrigger = false;
+	public static boolean playTrigger = false,
+			endGameTrigger = false,
+			retryTrigger = false,
+			exitTrigger = false;
 	
 	public enum gameState {
 		welcomeScreen,

@@ -149,43 +149,80 @@ public class Grid {
 		if(dropTimer!=null)
 			dropTimer.stop();
 		if (rows.size() == 1) {
-			RunTetris.incScore(100);
+			RunTetris.incScore(200);
 		} else if (rows.size() == 2) {
-			RunTetris.incScore(300);
+			RunTetris.incScore(600);
 		} else if (rows.size() == 3) {
-			RunTetris.incScore(500);
+			RunTetris.incScore(1000);
 		} else if (rows.size() == 4) {
-			RunTetris.incScore(800);
+			RunTetris.incScore(1600);
 		}
 		currTetr = new EmptyTetromino();
-		for (int row:rows)
-			for(int j=0;j<grid[0].length;j++){
-				grid[row][j] = new Block();
-			}
 		ActionListener action = new ActionListener() {
-			int shift = 0;
+			int fromCenter = 0;
 			public void actionPerformed(ActionEvent e) {
-				if (rows.size()>0) {
-					int bottomRow = rows.get(rows.size()-1);
-					for (int i=bottomRow;i>0;i--) {
-						grid[i+shift] = grid[i+shift-1];
-					grid[shift]= new Block[10];
-					for (int j=0;j<10;j++)
-						grid[shift][j]= new Block();
+				if(fromCenter<5){
+					for (int row:rows) {
+						grid[row][4-fromCenter] = new Block();
+						grid[row][4+fromCenter+1] = new Block();
 					}
-					rows.remove(rows.size()-1);
-					shift++;
-				}else {
-				dropTetr(nextTetr.get(0));
-				nextTetr.remove(0);
-				nextTetr.add(Tetromino.getRandomTetromino());
-				clearTimer.stop();
+					fromCenter++;
+				}else{
+					clearTimer.stop();
+					ActionListener newAction = new ActionListener() {
+						int shift = 0;
+						public void actionPerformed(ActionEvent e) {
+							if (rows.size()>0) {
+								int bottomRow = rows.get(rows.size()-1);
+								for (int i=bottomRow;i>0;i--) {
+									grid[i+shift] = grid[i+shift-1];
+								grid[shift]= new Block[10];
+								for (int j=0;j<10;j++)
+									grid[shift][j]= new Block();
+								}
+								rows.remove(rows.size()-1);
+								shift++;
+							}else {
+							dropTetr(nextTetr.get(0));
+							nextTetr.remove(0);
+							nextTetr.add(Tetromino.getRandomTetromino());
+							clearTimer.stop();
+							}
+							if(dropTimer!=null)
+								dropTimer.start();
+						}
+					};
+					clearTimer = new Timer(1,newAction);
+					clearTimer.setRepeats(true);
+					clearTimer.start();
 				}
-				if(dropTimer!=null)
-					dropTimer.start();
 			}
 		};
-		clearTimer = new Timer(5,action);
+//		action = new ActionListener() {
+//			int shift = 0;
+//			public void actionPerformed(ActionEvent e) {
+//				if (rows.size()>0) {
+//					int bottomRow = rows.get(rows.size()-1);
+//					for (int i=bottomRow;i>0;i--) {
+//						grid[i+shift] = grid[i+shift-1];
+//					grid[shift]= new Block[10];
+//					for (int j=0;j<10;j++)
+//						grid[shift][j]= new Block();
+//					}
+//					rows.remove(rows.size()-1);
+//					shift++;
+//				}else {
+//				dropTetr(nextTetr.get(0));
+//				nextTetr.remove(0);
+//				nextTetr.add(Tetromino.getRandomTetromino());
+//				clearTimer.stop();
+//				}
+//				if(dropTimer!=null)
+//					dropTimer.start();
+//			}
+//		};
+		clearTimer = new Timer(1,action);
+		clearTimer.setInitialDelay(1);
 		clearTimer.setRepeats(true);
 		clearTimer.start();
 		return rows;
