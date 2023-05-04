@@ -113,13 +113,19 @@ public class Grid {
 			}
 			if(canClear&&!clearRows.contains(block.getY())) {
 				clearRows.add(block.getY());
-				while(clearRows.indexOf(block.getY())>0&&
-						block.getY()<clearRows.get(clearRows.indexOf(block.getY())-1)) {
-				clearRows.add(clearRows.remove(clearRows.indexOf(block.getY())-1));
+				int index = clearRows.indexOf(block.getY());
+				while(index>0&&
+						block.getY()<clearRows.get(index-1)) {
+					System.out.println("Swap "+block.getY()+" and "+ clearRows.get(index-1));
+				clearRows.set(index, clearRows.get(index-1));
+				clearRows.set(index-1, block.getY());
+				index--;
 				}
 			}
 		}
 		if (clearRows.size()>0) {
+			for(int i:clearRows)
+				System.out.println(i);
 			clearRows(clearRows);
 		}else if (!testTetrPlacement(nextTetr.get(0), 0, 0)) {
 			RunTetris.endGameTrigger = true;
