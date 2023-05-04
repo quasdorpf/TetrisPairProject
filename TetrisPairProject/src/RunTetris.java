@@ -73,7 +73,6 @@ public class RunTetris {
 		screen.pack();
 		screen.setVisible(true);
 		refreshTimer.start();
-		
 	}
 	
 	public void playTetris() { // essentially a runWelcomeScreen
@@ -95,6 +94,7 @@ public class RunTetris {
 	
 	public void endGame() {
 		state = gameState.gameOver;
+		leaderboard.addScore(score);
 		dropTimer.stop();
 	}
 	

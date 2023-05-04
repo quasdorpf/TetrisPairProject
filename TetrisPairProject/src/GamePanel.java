@@ -12,10 +12,6 @@ public class GamePanel extends JPanel {
 	public static final double ROUND_RAD_PERC = 0.04;
 	public static final Color BETTER_BLACK = new Color(10, 10, 10); // Very dark grey is better than absolute black
 	
-	private JFrame screen = RunTetris.screen;
-	private WelcomeScreen welcomeScreen = RunTetris.welcomeScreen;
-	private Leaderboard leaderboard = RunTetris.leaderboard;
-	
 	public static int blockSize;
 	private Block[][] visGrid;
 	
@@ -43,7 +39,9 @@ public class GamePanel extends JPanel {
 	
 	public void drawWelcomeScreenAndLeaderboard(Graphics g) {
 		
-		welcomeScreen.display(g, screen, this);
+		RunTetris.welcomeScreen.draw(g, RunTetris.screen, this);
+		RunTetris.leaderboard.draw(g, RunTetris.getWidthPerc(0.7), RunTetris.getHeightPerc(0.15), RunTetris.getSizePerc(0.3), 
+				RunTetris.getSizePerc(0.5));
 		
 	}
 	
@@ -197,7 +195,7 @@ public class GamePanel extends JPanel {
 				color, colInc, false);
 	}
 	
-	private static int range(int num, int min, int max) {
+	public static int range(int num, int min, int max) {
 		if (num < min) {
 			return min;
 		} else if (num > max) {
@@ -207,7 +205,7 @@ public class GamePanel extends JPanel {
 		}
 	}
 	
-	private static double specNumInPerc(int num) {
+	public static double specNumInPerc(int num) {
 		return ((double)num/(double)RunTetris.DEFAULT_SIZE);
 	}
 }
