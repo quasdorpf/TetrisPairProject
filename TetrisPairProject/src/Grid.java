@@ -10,13 +10,14 @@ public class Grid {
 	private Block[][] grid;
 	Timerx clearTimer;
 	Timer dropTimer;
-	private boolean setting;
+	public boolean setting;
 	private boolean holding;
 	Grid(){
 		initializeGrid();
 	}
 	public void initializeGrid() {
 		grid = new Block[20][10];
+		setting = true;
 		holding = false;
 		nextTetr = new ArrayList<Tetromino>();
 		heldTetr = new EmptyTetromino();
@@ -33,7 +34,6 @@ public class Grid {
 		currTetr = tetr;
 	}
 	public void fallTetr() {
-		setting=true;
 		boolean stop = false;
 		for(Block block: currTetr.getBlocks()) {
 			boolean pause=(block.getY()+1==20);
@@ -197,29 +197,6 @@ public class Grid {
 				}
 			}
 		};
-//		action = new ActionListener() {
-//			int shift = 0;
-//			public void actionPerformed(ActionEvent e) {
-//				if (rows.size()>0) {
-//					int bottomRow = rows.get(rows.size()-1);
-//					for (int i=bottomRow;i>0;i--) {
-//						grid[i+shift] = grid[i+shift-1];
-//					grid[shift]= new Block[10];
-//					for (int j=0;j<10;j++)
-//						grid[shift][j]= new Block();
-//					}
-//					rows.remove(rows.size()-1);
-//					shift++;
-//				}else {
-//				dropTetr(nextTetr.get(0));
-//				nextTetr.remove(0);
-//				nextTetr.add(Tetromino.getRandomTetromino());
-//				clearTimer.stop();
-//				}
-//				if(dropTimer!=null)
-//					dropTimer.start();
-//			}
-//		};
 		clearTimer = new Timerx();
 		clearTimer.scheduleAtFixedRate(task,10,50);
 		return rows;
