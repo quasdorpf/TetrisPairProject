@@ -8,9 +8,11 @@ public class HardDropAction extends AbstractAction {
 		this.grid = grid;
 	}
 	public void actionPerformed(ActionEvent e) {
-		while (grid.setting)
-			grid.fallTetr();
-		grid.setting=true;
+		if (RunTetris.state == RunTetris.gameState.playing) {
+			while (grid.setting)
+				grid.fallTetr();
+			grid.setting=true;
+		}
 	}
 
 }
