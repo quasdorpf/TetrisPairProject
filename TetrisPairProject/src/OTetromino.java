@@ -4,6 +4,7 @@ import java.awt.Graphics;
 public class OTetromino extends Tetromino {
 	private static final Color color = Color.YELLOW;
 	public OTetromino() {
+		this.setPosition(0, 4);
 		Block[][] rotation = new Block[4][4];
 		for (int k=0; k<4; k++) {
 			for (int i=0; i<2; i++) {
