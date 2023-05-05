@@ -19,8 +19,8 @@ public class ITetromino extends Tetromino {
 			// 3 - LEFT
 			rotation[3][i] = new Block(color,new int[] {i,1});
 		}
-		
 		setRotation(rotation);
+		setBlockPosition(0, 3);
 	}
 	public Tetromino getNewTetromino() {
 		return new ITetromino();

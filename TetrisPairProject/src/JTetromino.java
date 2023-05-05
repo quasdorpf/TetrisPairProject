@@ -29,6 +29,7 @@ public class JTetromino extends Tetromino {
 		rotation[3][2] = new Block(color,new int[] {1,1});
 		rotation[3][3] = new Block(color,new int[] {2,1});
 		setRotation(rotation);
+		setBlockPosition(0, 3);
 	}
 	public Tetromino getNewTetromino() {
 		return new JTetromino();
