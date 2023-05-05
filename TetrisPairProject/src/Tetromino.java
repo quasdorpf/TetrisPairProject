@@ -8,7 +8,7 @@ public abstract class Tetromino {
 	private int[] position;
 	private int currRotation = 0; // would be used in rotations[currRotation]
 	Tetromino(){
-		position = new int[]{0,3};
+		position = new int[]{0,0};
 		rotation = new Block[4][4];
 	}
 	public abstract Tetromino getNewTetromino();
