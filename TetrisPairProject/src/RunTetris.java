@@ -18,7 +18,7 @@ public class RunTetris {
 	
 	public static JButton playButton, retryButton, exitButton;
 	
-	public static InputMap inputMap;
+	private static InputMap inputMap;
 	private static ActionMap actionMap;
 	
 	private static int score;

@@ -141,6 +141,9 @@ public class Grid {
 		for(int i=0;i<grid.length;i++){
 			for(int j=0;j<grid[0].length;j++){
 				visibleGrid[i][j] = grid[i][j];
+				if (grid[i][j] == null) {
+					System.out.println(i + " " + j);
+				}
 			}
 		}
 		for(Block block: currTetr.getBlocks()) {
