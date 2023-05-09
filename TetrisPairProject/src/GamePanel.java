@@ -1,11 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 public class GamePanel extends JPanel {
-	public static final Tetromino[] tetrs = {
-			new ITetromino(), new JTetromino(), new LTetromino(),
-			new OTetromino(), new STetromino(), new TTetromino(), 
-			new ZTetromino()
-	};
 	public static final double BLOCK_SIZE_PERC = 0.04;
 	public static final double GRID_X_PERC = 0.32;
 	public static final double GRID_Y_PERC = 0.05;
@@ -39,10 +34,29 @@ public class GamePanel extends JPanel {
 	
 	public void drawWelcomeScreenAndLeaderboard(Graphics g) {
 		
-		RunTetris.welcomeScreen.draw(g, RunTetris.screen, this);
+		// Welcome screen
+		int gridX = RunTetris.getWidthPerc(GRID_X_PERC);
+		int gridY = RunTetris.getHeightPerc(GRID_Y_PERC);
+		Block[][] visGrid = RunTetris.grid.makeVisible();
+		drawGridOutlineDecoration(g);
+		drawGridOutline(g, gridX, gridY, 
+				visGrid[0].length, visGrid.length, blockSize);
+		g.drawImage(new ImageIcon("Imgs/tetris-logo.png").getImage(), gridX+blockSizeMultiply(1.25), 
+				gridY+blockSizeMultiply(3.75), blockSizeMultiply(7.5), blockSizeMultiply(6.25), this);
+		RunTetris.playButton.setBounds(gridX+blockSizeMultiply(1.75), 
+				gridY+blockSizeMultiply(11.25), blockSizeMultiply(6.5), 
+				blockSizeMultiply(2));
+		RunTetris.playButton.setBackground(new Color(245, 245, 245));
+		this.add(RunTetris.playButton);
+		
+		// Leaderboard
 		RunTetris.leaderboard.draw(g, RunTetris.getWidthPerc(0.7), RunTetris.getHeightPerc(0.15), RunTetris.getSizePerc(0.3), 
 				RunTetris.getSizePerc(0.5));
 		
+	}
+	
+	private int blockSizeMultiply(double num) {
+		return (int)((double)blockSize*num);
 	}
 	
 	public void drawGridAndBackground(Graphics g) {

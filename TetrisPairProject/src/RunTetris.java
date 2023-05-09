@@ -11,7 +11,6 @@ public class RunTetris {
 	public static JFrame screen;
 	public static GamePanel gamePanel;
 	public static Clicker clicker;
-	public static WelcomeScreen welcomeScreen;
 	public static Leaderboard leaderboard;
 	public static Grid grid;
 	public static gameState state;
@@ -42,7 +41,6 @@ public class RunTetris {
 		
 		clicker = new Clicker(grid);
 		
-		welcomeScreen = new WelcomeScreen();
 		leaderboard = new Leaderboard();
 		
 		gamePanel = new GamePanel(DEFAULT_WIDTH, DEFAULT_HEIGHT);
@@ -73,6 +71,7 @@ public class RunTetris {
 		screen.pack();
 		screen.setVisible(true);
 		refreshTimer.start();
+		screen.setSize(RunTetris.DEFAULT_WIDTH, RunTetris.DEFAULT_HEIGHT);
 	}
 	
 	public void playTetris() { // essentially a runWelcomeScreen
