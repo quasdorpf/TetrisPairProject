@@ -7,7 +7,7 @@ public class GamePanel extends JPanel {
 	public static final double ROUND_RAD_PERC = 0.04;
 	public static final Color BETTER_BLACK = new Color(10, 10, 10); // Very dark grey is better than absolute black
 	
-	public static int blockSize;
+	private static int blockSize;
 	private Block[][] visGrid;
 	
 	
@@ -20,7 +20,7 @@ public class GamePanel extends JPanel {
 		super.paintComponent(g);
 		blockSize = RunTetris.getSizePerc(BLOCK_SIZE_PERC);
 		visGrid = RunTetris.grid.makeVisible();
-		g.setColor(Color.WHITE);
+		g.setColor(new Color(245, 245, 245));
 		g.fillRect(0, 0, RunTetris.screen.getWidth(), RunTetris.screen.getHeight());
 		if (RunTetris.state == RunTetris.gameState.welcomeScreen) {
 			drawWelcomeScreenAndLeaderboard(g);
@@ -50,7 +50,8 @@ public class GamePanel extends JPanel {
 		this.add(RunTetris.playButton);
 		
 		// Leaderboard
-		RunTetris.leaderboard.draw(g, RunTetris.getWidthPerc(0.7), RunTetris.getHeightPerc(0.15), RunTetris.getSizePerc(0.3), 
+		RunTetris.leaderboard.draw(g, gridX+(blockSize*visGrid[0].length)+RunTetris.getSizePerc(0.1), 
+				gridY+(blockSize*4), RunTetris.getSizePerc(0.3), 
 				RunTetris.getSizePerc(0.5));
 		
 	}
@@ -83,6 +84,25 @@ public class GamePanel extends JPanel {
 			RunTetris.grid.getNextTetr(i).draw(g, tetrX, y+RunTetris.getSizePerc(0.06+(i*0.12)), blockSize);
 		}
 		
+		// Controls
+		y = RunTetris.getHeightPerc(GRID_Y_PERC) + height + RunTetris.getSizePerc(0.05);
+		width = RunTetris.getSizePerc(0.3);
+		height = RunTetris.getSizePerc(0.28);
+		drawLayeredRoundRect(g, x, y, width, height, arcWidth, arcHeight, RunTetris.getSizePerc(specNumInPerc(10)), Color.BLACK, 
+				RunTetris.getSizePerc(specNumInPerc(7)), false);
+		g.setColor(Color.WHITE);
+		g.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
+		g.setColor(Color.BLACK);
+		g.setFont(new Font("Serif", Font.PLAIN, RunTetris.getSizePerc(specNumInPerc(20))));
+		g.drawString("Controls", x+(int)((double)width*0.2), y+(int)((double)height*0.15));
+		g.setFont(new Font("Serif", Font.PLAIN, RunTetris.getSizePerc(specNumInPerc(16))));
+		g.drawString("Shift Left: Left Arrow", x+(int)((double)width*0.07), y+(int)((double)height*0.3));
+		g.drawString("Shift Right: Right Arrow", x+(int)((double)width*0.07), y+(int)((double)height*0.42));
+		g.drawString("Drop: Down Arrow", x+(int)((double)width*0.07), y+(int)((double)height*0.54));
+		g.drawString("Rotate: Up Arrow", x+(int)((double)width*0.07), y+(int)((double)height*0.66));
+		g.drawString("Hard Drop: Space", x+(int)((double)width*0.07), y+(int)((double)height*0.78));
+		g.drawString("Hold Tetr: C", x+(int)((double)width*0.07), y+(int)((double)height*0.9));
+		
 		// Held Tetromino
 		width = RunTetris.getSizePerc(0.2);
 		height = RunTetris.getSizePerc(0.3);
@@ -93,6 +113,7 @@ public class GamePanel extends JPanel {
 		g.setColor(Color.WHITE);
 		g.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
 		g.setColor(Color.BLACK);
+		g.setFont(new Font("Serif", Font.PLAIN, RunTetris.getSizePerc(specNumInPerc(20))));
 		g.drawString("Hold", x+(int)((double)width/3.5), y+RunTetris.getHeightPerc(0.04));
 		Tetromino heldTetr = RunTetris.grid.getHeldTetr();
 		if (heldTetr != null) {
@@ -107,14 +128,14 @@ public class GamePanel extends JPanel {
 		g.setColor(Color.WHITE);
 		g.fillRoundRect(x, y, width, height, arcWidth, arcHeight);
 		g.setColor(Color.BLACK);
-		g.drawString("Score", x+(int)((double)width/3.5), y+RunTetris.getHeightPerc(0.04));
+		g.drawString("Score", x+(int)((double)width/3.5), y+RunTetris.getSizePerc(0.04));
 		double digits;
 		int scoreRem = RunTetris.getScore();
 		for (digits=0; scoreRem>0; digits++) {
 			scoreRem /= 10;
 		}
 		g.drawString(String.valueOf(RunTetris.getScore()), x+(int)((double)width/2.4)-(RunTetris.getWidthPerc((digits-1)*0.005)), 
-				y+RunTetris.getHeightPerc(0.09));
+				y+RunTetris.getSizePerc(0.09));
 	}
 	
 	public void drawGameOverScreen(Graphics g) {
