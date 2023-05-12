@@ -11,7 +11,7 @@ public class RunTetris {
 	public static final Character LEFT = 'L';
 	public static final Character RIGHT = 'R';
 	public static final int DEFAULT_SIZE = Math.min(DEFAULT_WIDTH, DEFAULT_HEIGHT);
-	private static final int TIME_BETWEEN_ANIMATIONS = 30;
+	private static final int TIME_BETWEEN_ANIMATIONS = 50;
 	private static final int TIME_BETWEEN_DROPS = 1000;
 	
 	public static JFrame screen;
