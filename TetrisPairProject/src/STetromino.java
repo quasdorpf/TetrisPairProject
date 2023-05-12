@@ -8,7 +8,7 @@ public class STetromino extends Tetromino {
 		rotation[0][0] = new Block(color,new int[] {1,0});
 		rotation[0][1] = new Block(color,new int[] {0,1});
 		rotation[0][2] = new Block(color,new int[] {1,1});
-		rotation[0][3] = new Block(color,new int[] {0,2});
+		rotation[0][3]  = new Block(color,new int[] {0,2});
 		
 		// 1 - RIGHT
 		rotation[1][0] = new Block(color,new int[] {0,1});
