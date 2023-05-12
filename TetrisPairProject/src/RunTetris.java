@@ -96,7 +96,7 @@ public class RunTetris {
 		grid.initializeGrid();
 		score = 0;		
 		
-		
+		dropTimer.setDelay(TIME_BETWEEN_DROPS);
 		dropTimer.start();
 	}
 	
@@ -141,6 +141,7 @@ public class RunTetris {
 	private static ActionListener dropper = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			grid.fallTetr();
+			dropTimer.setDelay((int)((double)TIME_BETWEEN_DROPS/(((double)score+20000.0)*0.00005)));
 		}
 	};
 	public static Timer dropTimer = new Timer(TIME_BETWEEN_DROPS, dropper);
