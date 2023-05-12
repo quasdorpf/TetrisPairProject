@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 public class GamePanel extends JPanel {
 	public static final double BLOCK_SIZE_PERC = 0.04;
-	public static final double GRID_X_PERC = 0.32;
+	public static final double GRID_X_PERC = 0.3;
 	public static final double GRID_Y_PERC = 0.05;
 	public static final double ROUND_RAD_PERC = 0.04;
 	public static final Color BETTER_BLACK = new Color(10, 10, 10); // Very dark grey is better than absolute black
@@ -65,7 +65,7 @@ public class GamePanel extends JPanel {
 		drawGrid(g, RunTetris.getWidthPerc(GRID_X_PERC), RunTetris.getHeightPerc(GRID_Y_PERC), blockSize);
 		
 		// Next Tetrominoes
-		int x = RunTetris.getWidthPerc(BLOCK_SIZE_PERC+(visGrid[0].length*BLOCK_SIZE_PERC)+0.25);
+		int x = RunTetris.getWidthPerc(GRID_X_PERC) + (blockSize*visGrid[0].length) + RunTetris.getWidthPerc(0.066);
 		int y = RunTetris.getHeightPerc(GRID_Y_PERC);
 		int width = RunTetris.getSizePerc(0.2);
 		int height = RunTetris.getSizePerc(0.5);
@@ -104,9 +104,9 @@ public class GamePanel extends JPanel {
 		g.drawString("Hold Tetr:      C", x+(int)((double)width*0.07), y+(int)((double)height*0.9));
 		
 		// Held Tetromino
-		width = RunTetris.getSizePerc(0.2);
-		height = RunTetris.getSizePerc(0.3);
-		x = RunTetris.getWidthPerc(GRID_X_PERC-0.22);
+		width = RunTetris.getSizePerc(0.175);
+		height = RunTetris.getSizePerc(0.25);
+		x = RunTetris.getWidthPerc(GRID_X_PERC-0.066) - width;
 		y = RunTetris.getHeightPerc(GRID_Y_PERC);
 		drawLayeredRoundRect(g, x, y, width, height, arcWidth, arcHeight, RunTetris.getSizePerc(specNumInPerc(10)), Color.BLACK,
 				RunTetris.getSizePerc(specNumInPerc(7)), false);
@@ -122,7 +122,7 @@ public class GamePanel extends JPanel {
 		
 		// Score
 		y = RunTetris.getHeightPerc(GRID_Y_PERC) + RunTetris.getSizePerc(0.5);
-		height = RunTetris.getSizePerc(0.2);
+		height = RunTetris.getSizePerc(0.18);
 		drawLayeredRoundRect(g, x, y, width, height, arcWidth, arcHeight, RunTetris.getSizePerc(specNumInPerc(10)), Color.BLACK,
 				RunTetris.getSizePerc(specNumInPerc(7)), false);
 		g.setColor(Color.WHITE);
@@ -139,8 +139,8 @@ public class GamePanel extends JPanel {
 	}
 	
 	public void drawGameOverScreen(Graphics g) {
-		int x = RunTetris.getWidthPerc(GRID_X_PERC+0.0);
-		int y = RunTetris.getHeightPerc(GRID_Y_PERC+0.2);
+		int x = RunTetris.getWidthPerc(GRID_X_PERC);
+		int y = RunTetris.getHeightPerc(GRID_Y_PERC) + (int)((double)blockSize*4.8);
 		int width = RunTetris.getSizePerc(BLOCK_SIZE_PERC*10);
 		int height = RunTetris.getSizePerc(BLOCK_SIZE_PERC*10);
 		int arcWidth = RunTetris.getWidthPerc(ROUND_RAD_PERC);
