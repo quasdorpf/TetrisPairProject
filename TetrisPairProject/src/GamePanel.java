@@ -96,12 +96,12 @@ public class GamePanel extends JPanel {
 		g.setFont(new Font("Serif", Font.PLAIN, RunTetris.getSizePerc(specNumInPerc(20))));
 		g.drawString("Controls", x+(int)((double)width*0.2), y+(int)((double)height*0.15));
 		g.setFont(new Font("Serif", Font.PLAIN, RunTetris.getSizePerc(specNumInPerc(16))));
-		g.drawString("Shift Left: Left Arrow", x+(int)((double)width*0.07), y+(int)((double)height*0.3));
-		g.drawString("Shift Right: Right Arrow", x+(int)((double)width*0.07), y+(int)((double)height*0.42));
-		g.drawString("Drop: Down Arrow", x+(int)((double)width*0.07), y+(int)((double)height*0.54));
-		g.drawString("Rotate: Up Arrow", x+(int)((double)width*0.07), y+(int)((double)height*0.66));
-		g.drawString("Hard Drop: Space", x+(int)((double)width*0.07), y+(int)((double)height*0.78));
-		g.drawString("Hold Tetr: C", x+(int)((double)width*0.07), y+(int)((double)height*0.9));
+		g.drawString("Shift Left:       ←", x+(int)((double)width*0.07), y+(int)((double)height*0.3));
+		g.drawString("Shift Right:     →", x+(int)((double)width*0.07), y+(int)((double)height*0.42));
+		g.drawString("Drop:             ↓", x+(int)((double)width*0.07), y+(int)((double)height*0.54));
+		g.drawString("Rotate:           ↑", x+(int)((double)width*0.07), y+(int)((double)height*0.66));
+		g.drawString("Hard Drop:    Space", x+(int)((double)width*0.07), y+(int)((double)height*0.78));
+		g.drawString("Hold Tetr:      C", x+(int)((double)width*0.07), y+(int)((double)height*0.9));
 		
 		// Held Tetromino
 		width = RunTetris.getSizePerc(0.2);
@@ -155,8 +155,10 @@ public class GamePanel extends JPanel {
 		g.drawString("Game Over", x+(int)((double)blockSize*2.5), y+(int)((double)blockSize*1.5));
 		g.drawString("Your score: " + RunTetris.getScore(), x+(int)((double)blockSize*2.5), y+(blockSize*3));
 		RunTetris.retryButton.setBounds(x+(int)((double)blockSize*1.5), y+(blockSize*4), blockSize*3, (int)((double)blockSize*1.75));
+		RunTetris.retryButton.setBackground(new Color(245, 245, 245));
 		this.add(RunTetris.retryButton);
 		RunTetris.exitButton.setBounds(x+(int)((double)blockSize*5.5), y+(blockSize*4), blockSize*3, (int)((double)blockSize*1.75));
+		RunTetris.exitButton.setBackground(new Color(245, 245, 245));
 		this.add(RunTetris.exitButton);
 	}
 	
