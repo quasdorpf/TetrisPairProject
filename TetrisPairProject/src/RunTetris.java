@@ -1,9 +1,15 @@
 import javax.swing.*;
+import javax.swing.Timer;
+
+import java.awt.Point;
 import java.awt.event.*;
+import java.util.*;
 
 public class RunTetris {
 	public static final int DEFAULT_WIDTH = 800;
 	public static final int DEFAULT_HEIGHT = 600;
+	public static final Character LEFT = 'L';
+	public static final Character RIGHT = 'R';
 	public static final int DEFAULT_SIZE = Math.min(DEFAULT_WIDTH, DEFAULT_HEIGHT);
 	private static final int TIME_BETWEEN_ANIMATIONS = 30;
 	private static final int TIME_BETWEEN_DROPS = 1000;
@@ -14,10 +20,12 @@ public class RunTetris {
 	public static Leaderboard leaderboard;
 	public static Grid grid;
 	public static gameState state;
+	static ArrayList<Character> dirTracker = 
+			new ArrayList<Character>();
 	
 	public static JButton playButton, retryButton, exitButton;
 	
-	private static InputMap inputMap;
+	public static InputMap inputMap;
 	private static ActionMap actionMap;
 	
 	private static int score;
@@ -38,7 +46,6 @@ public class RunTetris {
 		screen.setResizable(true);
 		
 		grid = new Grid();
-		
 		clicker = new Clicker(grid);
 		
 		leaderboard = new Leaderboard();
@@ -62,6 +69,9 @@ public class RunTetris {
 		addShiftAction("DOWN");
 		addShiftAction("RIGHT");
 		addShiftAction("LEFT");
+		addReleaseShift("released RIGHT");
+		addReleaseShift("released LEFT");
+		addReleaseShift("released DOWN");
 		addHardDropAction("SPACE");
 		addRotateAction("UP");
 		addHoldAction("C");
@@ -71,7 +81,6 @@ public class RunTetris {
 		screen.pack();
 		screen.setVisible(true);
 		refreshTimer.start();
-		screen.setSize(RunTetris.DEFAULT_WIDTH, RunTetris.DEFAULT_HEIGHT);
 	}
 	
 	public void playTetris() { // essentially a runWelcomeScreen
@@ -135,6 +144,7 @@ public class RunTetris {
 		}
 	};
 	public static Timer dropTimer = new Timer(TIME_BETWEEN_DROPS, dropper);
+	public static Timerx shiftTimer = new Timerx();
 	
 	public static int getWidthPerc(double perc) {
 		return (int)((double)screen.getWidth() * perc);
@@ -149,7 +159,62 @@ public class RunTetris {
 	}
 	
 	private static void addShiftAction(String name){
-		Action newAction = new ShiftAction(name, grid);
+		Action newAction = new AbstractAction() {
+			Character dir = name.charAt(0);
+			{if (LEFT.charValue()==dir)
+				dir=LEFT;
+			else if (RIGHT.charValue()==dir)
+				dir=RIGHT;}
+			Grid griddy = grid;
+			public void actionPerformed(ActionEvent e) {
+				if ((dir.charValue()=='L'||dir.charValue()=='R')&&!dirTracker.contains(dir)){
+					grid.shiftTetr(dir);
+					dirTracker.add(dir);
+					if (dirTracker.size()==1) {
+						shiftTimer = new Timerx();
+						shiftTimer.scheduleAtFixedRate(new TimerTask() {
+							ArrayList<Character> tracker = dirTracker;
+							public void run() {
+								if (dirTracker.size()!=0) {
+									grid.shiftTetr(tracker.get(tracker.size()-1));}
+							}
+							
+						},200, 100);
+					}
+				}else if (dir=='D'){
+					dropTimer.stop();
+					dropTimer = new Timer(TIME_BETWEEN_DROPS/10, dropper);
+					dropTimer.setInitialDelay(0);
+					RunTetris.dropTimer.restart();
+				}
+			}
+		};
+		KeyStroke key = KeyStroke.getKeyStroke(name);
+		inputMap.put(key, name);
+		actionMap.put(name, newAction);
+	}
+	private static void addReleaseShift(String name){
+		Action newAction = new AbstractAction() {
+			Character dir = name.charAt(9);
+			{if (LEFT.charValue()==dir)
+				dir=LEFT;
+			else if (RIGHT.charValue()==dir)
+				dir=RIGHT;}
+			public void actionPerformed(ActionEvent e) {
+					System.out.println(dirTracker.size());
+				if (dir.charValue()=='L'||dir.charValue()=='R') {
+					dirTracker.remove(dir);
+					if (dirTracker.size()==0) {
+						shiftTimer.cancel();
+						shiftTimer = new Timerx();
+						}
+				}else if (dir=='D'){
+					dropTimer.stop();
+					dropTimer = new Timer(TIME_BETWEEN_DROPS, dropper);
+					RunTetris.dropTimer.restart();
+				}
+			}
+		};
 		KeyStroke key = KeyStroke.getKeyStroke(name);
 		inputMap.put(key, name);
 		actionMap.put(name, newAction);
