@@ -141,7 +141,6 @@ public class RunTetris {
 	private static ActionListener dropper = new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 			grid.fallTetr();
-			dropTimer.setDelay((int)((double)TIME_BETWEEN_DROPS/(((double)score+20000.0)*0.00005)));
 		}
 	};
 	public static Timer dropTimer = new Timer(TIME_BETWEEN_DROPS, dropper);
@@ -247,6 +246,7 @@ public class RunTetris {
 	
 	public static void incScore(int amount) {
 		score += amount;
+		dropTimer.setDelay((int)((double)TIME_BETWEEN_DROPS/(((double)score+20000.0)*0.00005)));
 	}	
 	
 	public static void main(String[] args) {

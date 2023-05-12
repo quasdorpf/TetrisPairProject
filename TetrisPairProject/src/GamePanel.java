@@ -121,7 +121,7 @@ public class GamePanel extends JPanel {
 		}
 		
 		// Score
-		y = RunTetris.getHeightPerc(GRID_Y_PERC+0.5);
+		y = RunTetris.getHeightPerc(GRID_Y_PERC) + RunTetris.getSizePerc(0.5);
 		height = RunTetris.getSizePerc(0.2);
 		drawLayeredRoundRect(g, x, y, width, height, arcWidth, arcHeight, RunTetris.getSizePerc(specNumInPerc(10)), Color.BLACK,
 				RunTetris.getSizePerc(specNumInPerc(7)), false);
