@@ -6,11 +6,6 @@ public class Clicker implements KeyListener, MouseListener, ActionListener {
 	Clicker(Grid g){
 		grid = g;
 		visibleGrid = g.makeVisible();
-		for (Block[] row: visibleGrid) {
-			for (Block block: row)
-				System.out.print(block.isEmpty()+"  ");
-			System.out.println();
-		}
 	}
 	public void keyTyped(KeyEvent e) {
 		
@@ -25,8 +20,7 @@ public class Clicker implements KeyListener, MouseListener, ActionListener {
 	}
 	
 	public void mouseClicked(MouseEvent e) {
-		System.out.println("jj");
-			grid.fallTetr();
+		grid.fallTetr();
 		visibleGrid = grid.makeVisible();
 		
 		RunTetris.dropTimer.restart();

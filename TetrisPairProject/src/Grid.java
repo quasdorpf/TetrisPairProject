@@ -116,16 +116,13 @@ public class Grid {
 				int index = clearRows.indexOf(block.getY());
 				while(index>0&&
 						block.getY()<clearRows.get(index-1)) {
-					System.out.println("Swap "+block.getY()+" and "+ clearRows.get(index-1));
-				clearRows.set(index, clearRows.get(index-1));
-				clearRows.set(index-1, block.getY());
-				index--;
+					clearRows.set(index, clearRows.get(index-1));
+					clearRows.set(index-1, block.getY());
+					index--;
 				}
 			}
 		}
 		if (clearRows.size()>0) {
-			for(int i:clearRows)
-				System.out.println(i);
 			clearRows(clearRows);
 		}else if (!testTetrPlacement(nextTetr.get(0), 0, 0)) {
 			RunTetris.endGameTrigger = true;
@@ -141,9 +138,6 @@ public class Grid {
 		for(int i=0;i<grid.length;i++){
 			for(int j=0;j<grid[0].length;j++){
 				visibleGrid[i][j] = grid[i][j];
-				if (grid[i][j] == null) {
-					System.out.println(i + " " + j);
-				}
 			}
 		}
 		for(Block block: currTetr.getBlocks()) {

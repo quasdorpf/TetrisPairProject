@@ -201,7 +201,6 @@ public class RunTetris {
 			else if (RIGHT.charValue()==dir)
 				dir=RIGHT;}
 			public void actionPerformed(ActionEvent e) {
-					System.out.println(dirTracker.size());
 				if (dir.charValue()=='L'||dir.charValue()=='R') {
 					dirTracker.remove(dir);
 					if (dirTracker.size()==0) {

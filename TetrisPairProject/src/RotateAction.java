@@ -13,13 +13,6 @@ public class RotateAction  extends AbstractAction {
 		if (RunTetris.state == RunTetris.gameState.playing) {
 			grid.rotate(rotation);
 		}
-//		for (Block[] row: visibleGrid) {
-//			for (Block block: row)
-//				System.out.print(block.isEmpty()+"  ");
-//			System.out.println();
-//		}
-//		System.out.println();
-//		System.out.println();
 	}
 
 }
