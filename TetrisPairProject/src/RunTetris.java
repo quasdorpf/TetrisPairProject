@@ -25,7 +25,7 @@ public class RunTetris {
 	
 	public static JButton playButton, retryButton, exitButton;
 	
-	public static InputMap inputMap;
+	private static InputMap inputMap;
 	private static ActionMap actionMap;
 	
 	private static int score;
@@ -219,21 +219,21 @@ public class RunTetris {
 		actionMap.put(name, newAction);
 	}
 	private static void addHardDropAction(String name){
-		Action newAction = new HardDropAction(grid);
+		Action newAction = new HardDropAction();
 		KeyStroke key = KeyStroke.getKeyStroke(name);
 		inputMap.put(key, name);
 		actionMap.put(name, newAction);
 	}
 	
 	private static void addRotateAction(String name) {
-		Action newAction = new RotateAction(grid, 1);
+		Action newAction = new RotateAction(1);
 		KeyStroke key = KeyStroke.getKeyStroke(name);
 		inputMap.put(key, name);
 		actionMap.put(name, newAction);
 	}
 	
 	private static void addHoldAction(String name) {
-		Action newAction = new HoldAction(grid);
+		Action newAction = new HoldAction();
 		KeyStroke key = KeyStroke.getKeyStroke(name);
 		inputMap.put(key, name);
 		actionMap.put(name, newAction);

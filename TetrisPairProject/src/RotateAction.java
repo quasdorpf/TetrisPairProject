@@ -3,15 +3,13 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 public class RotateAction  extends AbstractAction {
-	private Grid grid;
 	private int rotation;
-	public RotateAction(Grid grid,int rotation){
+	public RotateAction(int rotation){
 		this.rotation = rotation;
-		this.grid = grid;
 	}
 	public void actionPerformed(ActionEvent e) {
 		if (RunTetris.state == RunTetris.gameState.playing) {
-			grid.rotate(rotation);
+			RunTetris.grid.rotate(rotation);
 		}
 	}
 
