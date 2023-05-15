@@ -1,9 +1,9 @@
 import java.awt.event.*;
 
 public class Clicker implements KeyListener, MouseListener, ActionListener {
-	Grid grid;
-	Block[][] visibleGrid;
-	Clicker(Grid g){
+	private Grid grid;
+	private Block[][] visibleGrid;
+	public Clicker(Grid g){
 		grid = g;
 		visibleGrid = g.makeVisible();
 	}

@@ -1,7 +1,7 @@
 
 public class EmptyTetromino extends Tetromino {
 
-	EmptyTetromino(){
+	public EmptyTetromino(){
 		super();
 		Block[][] rotation = new Block[4][4];
 		for (int k=0; k<4; k++) {

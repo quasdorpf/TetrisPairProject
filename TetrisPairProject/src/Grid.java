@@ -8,11 +8,11 @@ public class Grid {
 	private Tetromino heldTetr;
 	private ArrayList<Tetromino> nextTetr;
 	private Block[][] grid;
-	Timerx clearTimer;
-	Timer dropTimer;
+	private Timerx clearTimer;
+	private Timer dropTimer;
 	public boolean setting;
 	private boolean holding;
-	Grid(){
+	public Grid(){
 		initializeGrid();
 	}
 	public void initializeGrid() {

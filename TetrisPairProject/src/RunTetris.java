@@ -20,7 +20,7 @@ public class RunTetris {
 	public static Leaderboard leaderboard;
 	public static Grid grid;
 	public static gameState state;
-	static ArrayList<Character> dirTracker = 
+	private static ArrayList<Character> dirTracker = 
 			new ArrayList<Character>();
 	
 	public static JButton playButton, retryButton, exitButton;

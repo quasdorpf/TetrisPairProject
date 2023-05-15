@@ -4,7 +4,7 @@ import javax.swing.AbstractAction;
 
 public class HardDropAction extends AbstractAction {
 	private Grid grid;
-	HardDropAction(Grid grid){
+	public HardDropAction(Grid grid){
 		this.grid = grid;
 	}
 	public void actionPerformed(ActionEvent e) {

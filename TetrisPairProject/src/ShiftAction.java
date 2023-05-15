@@ -5,7 +5,7 @@ import javax.swing.AbstractAction;
 public class ShiftAction extends AbstractAction {
 	private Grid grid;
 	private String name;
-	ShiftAction(String name,Grid grid){
+	public ShiftAction(String name,Grid grid){
 		this.name = name;
 		this.grid = grid;
 	}

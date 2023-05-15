@@ -5,7 +5,7 @@ import javax.swing.AbstractAction;
 public class RotateAction  extends AbstractAction {
 	private Grid grid;
 	private int rotation;
-	RotateAction(Grid grid,int rotation){
+	public RotateAction(Grid grid,int rotation){
 		this.rotation = rotation;
 		this.grid = grid;
 	}
